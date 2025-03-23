@@ -1,1 +1,1 @@
-sample model files to use for demonstration purposed during project acceleration
+sample model files to use for demonstration purposes during project acceleration
