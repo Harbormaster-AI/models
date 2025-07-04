@@ -259,7 +259,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-2-7-1709ab1b:13bd522a58d:-8000:00000000000009FB'
-              name = 'isTabbed' visibility = 'protected' isSpecification = 'false' ownerScope = 'instance'
+              name = 'tabbed' visibility = 'protected' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-1-113--6417551d:13ce3815fda:-8000:0000000000000C7A'>
@@ -2459,7 +2459,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-2-7-b317ad2:13bdd81291f:-8000:0000000000000A2B'
-              name = 'isVisible' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'visible' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-2-7-b317ad2:13bdd81291f:-8000:0000000000000A3E'>
@@ -2710,7 +2710,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-2-7--2217ebc1:13bda83dbe9:-8000:0000000000000A81'
-              name = 'isRequired' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'required' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-2-7--2217ebc1:13bda83dbe9:-8000:0000000000000A85'>
@@ -2729,7 +2729,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-2-7--2217ebc1:13bda83dbe9:-8000:0000000000000A8A'
-              name = 'isVisible' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'visible' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-2-4--2da87561:13c583e4fa0:-8000:0000000000000B58'>
