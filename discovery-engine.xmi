@@ -2588,7 +2588,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-1-108--60cbb5b0:13cb13400ad:-8000:0000000000000C04'
-              name = 'isAFilterField' visibility = 'public' isSpecification = 'false'
+              name = 'filterField' visibility = 'public' isSpecification = 'false'
               ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-1-108--60cbb5b0:13cb13400ad:-8000:0000000000000C08'>
@@ -2603,7 +2603,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-1-108--60cbb5b0:13cb13400ad:-8000:0000000000000C09'
-              name = 'isAFacetField' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
+              name = 'facetField' visibility = 'public' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-1-108--60cbb5b0:13cb13400ad:-8000:0000000000000C0D'>
