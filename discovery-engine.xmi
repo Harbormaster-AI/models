@@ -46,7 +46,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88-2-2--300ad9d4:13b9f0c8995:-8000:0000000000001144'
-              name = 'booleanType' visibility = 'protected' isSpecification = 'false'
+              name = 'booleanType' visibility = 'protected' specification = 'false'
               ownerScope = 'instance' changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88-2-7-1709ab1b:13bd522a58d:-8000:0000000000000BF5'>
