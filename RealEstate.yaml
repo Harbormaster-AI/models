@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Property"
       data:
@@ -57,4 +57,4 @@
         - name: "Commercial"
         - name: "Industrial"
         - name: "Land"
-    ```
+    

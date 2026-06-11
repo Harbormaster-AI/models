@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "Money"
@@ -178,4 +178,4 @@
       data:
         - name: "Debit"
         - name: "Credit"
-    ```
+    

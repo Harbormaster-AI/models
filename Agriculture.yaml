@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Farm"
@@ -56,4 +56,4 @@
         - name: "Soybean"
         - name: "Wheat"
         - name: "Cotton"
-    ```
+    

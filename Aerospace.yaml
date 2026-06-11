@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Aircraft"
@@ -60,4 +60,4 @@
         - name: "Military"
         - name: "Cargo"
         - name: "Private"
-    ```
+    

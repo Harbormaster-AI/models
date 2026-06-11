@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Campaign"
@@ -66,4 +66,4 @@
         - name: "Image"
         - name: "Video"
         - name: "Text"
-    ```
+    

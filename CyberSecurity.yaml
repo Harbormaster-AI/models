@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Asset"
@@ -67,4 +67,4 @@
         - name: "Medium"
         - name: "High"
         - name: "Critical"
-    ```
+    

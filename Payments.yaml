@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "Money"
@@ -254,4 +254,4 @@
         - name: "EUR"
         - name: "GBP"
         - name: "BRL"
-    ```
+    

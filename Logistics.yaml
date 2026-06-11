@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Shipment"
@@ -39,4 +39,4 @@
         - name: "Created"
         - name: "InTransit"
         - name: "Delivered"
-    ```
+    

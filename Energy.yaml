@@ -1,4 +1,4 @@
-  ```yaml id="n4owkh"
+
   entities:
 
     - name: "EnergyProducer"
@@ -58,4 +58,4 @@
         - name: "Hydro"
         - name: "Nuclear"
         - name: "Gas"
-    ```
+    

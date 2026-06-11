@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "Money"
@@ -147,4 +147,4 @@
         - name: "Medium"
         - name: "High"
         - name: "Critical"
-    ```
+    

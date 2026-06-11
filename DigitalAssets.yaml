@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "Money"
@@ -216,4 +216,4 @@
         - name: "Dividend"
         - name: "Split"
         - name: "Redemption"
-    ```
+    

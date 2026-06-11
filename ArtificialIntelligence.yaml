@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Model"
@@ -65,4 +65,4 @@
         - name: "Regression"
         - name: "Clustering"
         - name: "Generative"
-    ```
+    

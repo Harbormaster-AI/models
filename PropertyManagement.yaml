@@ -1,4 +1,4 @@
-  ```yaml id="property-gr-v1"
+
   valueObjects:
 
     - name: "Address"
@@ -249,4 +249,4 @@
         - name: "Pass"
         - name: "PassWithConditions"
         - name: "Fail"
-    ```
+    

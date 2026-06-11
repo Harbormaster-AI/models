@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Device"
@@ -85,4 +85,4 @@
         - name: "Pressure"
         - name: "Humidity"
         - name: "Motion"
-    ```
+    

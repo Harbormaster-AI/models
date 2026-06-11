@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "Money"
@@ -190,4 +190,4 @@
         - name: "Active"
         - name: "Claimed"
         - name: "Expired"
-    ```
+    

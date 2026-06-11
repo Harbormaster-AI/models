@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "CloudAccount"
@@ -56,4 +56,4 @@
         - name: "Storage"
         - name: "Network"
         - name: "Database"
-    ```
+    

@@ -1,4 +1,4 @@
-  ```yaml id="0w0d53"
+
   entities:
 
     - name: "Campaign"
@@ -79,4 +79,4 @@
         - name: "Social"
         - name: "Search"
         - name: "Display"
-    ```
+    

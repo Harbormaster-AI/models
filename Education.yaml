@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Student"
       data:
@@ -51,4 +51,4 @@
         - name: "Active"
         - name: "Completed"
         - name: "Withdrawn"
-    ```
+    

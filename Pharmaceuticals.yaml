@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Drug"
@@ -33,4 +33,4 @@
         - name: "Phase2"
         - name: "Phase3"
         - name: "Phase4"
-    ```
+    

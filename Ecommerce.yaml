@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Customer"
       data:
@@ -65,4 +65,4 @@
         - name: "ACH"
         - name: "PayPal"
         - name: "Crypto"
-    ```
+    

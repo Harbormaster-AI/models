@@ -1,4 +1,4 @@
-  ```yaml id="telecom-gr-v1"
+
   valueObjects:
 
     - name: "PersonName"
@@ -222,4 +222,4 @@
         - name: "Assigned"
         - name: "Resolved"
         - name: "Closed"
-    ```
+    

@@ -1,4 +1,4 @@
-  ```yaml id="n8z2wy"
+
   entities:
 
     - name: "Hotel"
@@ -104,4 +104,4 @@
         - name: "CheckedIn"
         - name: "CheckedOut"
         - name: "Cancelled"
-    ```
+    

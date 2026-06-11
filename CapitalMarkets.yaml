@@ -1,4 +1,4 @@
-  ```yaml id="capitalmarkets-gr-v1"
+
   valueObjects:
 
     - name: "Money"
@@ -214,4 +214,4 @@
         - name: "Pending"
         - name: "Settled"
         - name: "Failed"
-    ```
+    

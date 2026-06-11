@@ -1,4 +1,4 @@
-  ```yaml
+
   valueObjects:
 
     - name: "PersonName"
@@ -210,4 +210,4 @@
         - name: "Extended"
         - name: "Accepted"
         - name: "Declined"
-    ```
+    

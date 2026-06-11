@@ -1,4 +1,4 @@
-  ```yaml id="utilities-gr-v1"
+
   valueObjects:
 
     - name: "Address"
@@ -185,4 +185,4 @@
         - name: "Open"
         - name: "Assigned"
         - name: "Completed"
-    ```
+    

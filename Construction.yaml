@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Project"
@@ -46,4 +46,4 @@
         - name: "Residential"
         - name: "Commercial"
         - name: "Infrastructure"
-    ```
+    

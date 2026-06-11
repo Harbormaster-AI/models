@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
 
     - name: "Network"
@@ -51,4 +51,4 @@
         - name: "Public"
         - name: "Private"
         - name: "Consortium"
-    ```
+    

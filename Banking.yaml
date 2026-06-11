@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Customer"
       data:
@@ -67,4 +67,4 @@
         - name: "Withdrawal"
         - name: "Transfer"
         - name: "Payment"
-    ```
+    

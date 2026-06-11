@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Customer"
       data:
@@ -76,4 +76,4 @@
         - name: "Processing"
         - name: "Completed"
         - name: "Cancelled"
-    ```
+    

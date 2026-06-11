@@ -1,4 +1,4 @@
-  ```yaml
+
   entities:
     - name: "Citizen"
       data:
@@ -53,4 +53,4 @@
         - name: "Open"
         - name: "Closed"
         - name: "Pending"
-    ```
+    
