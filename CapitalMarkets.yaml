@@ -1,0 +1,217 @@
+  ```yaml id="capitalmarkets-gr-v1"
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+    - name: "Price"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Quantity"
+      data:
+        - name: "amount"
+        - name: "unitOfMeasure"
+
+  entities:
+
+    - name: "Investor"
+      data:
+        - name: "investorNumber"
+        - name: "legalName"
+
+      relations:
+        - name: "accounts"
+          type: "InvestmentAccount"
+          multiplicity: "OneToMany"
+
+        - name: "portfolios"
+          type: "Portfolio"
+          multiplicity: "OneToMany"
+
+    - name: "InvestmentAccount"
+      data:
+        - name: "accountNumber"
+
+      relations:
+        - name: "investor"
+          type: "Investor"
+          multiplicity: "ManyToOne"
+
+        - name: "orders"
+          type: "Order"
+          multiplicity: "OneToMany"
+
+    - name: "Portfolio"
+      data:
+        - name: "portfolioNumber"
+        - name: "name"
+
+      relations:
+        - name: "investor"
+          type: "Investor"
+          multiplicity: "ManyToOne"
+
+        - name: "positions"
+          type: "Position"
+          multiplicity: "OneToMany"
+
+    - name: "Security"
+      data:
+        - name: "ticker"
+        - name: "name"
+        - name: "securityType"
+          type: "SecurityType"
+
+      relations:
+        - name: "positions"
+          type: "Position"
+          multiplicity: "OneToMany"
+
+    - name: "Position"
+      data:
+        - name: "positionNumber"
+
+      relations:
+        - name: "portfolio"
+          type: "Portfolio"
+          multiplicity: "ManyToOne"
+
+        - name: "security"
+          type: "Security"
+          multiplicity: "ManyToOne"
+
+    - name: "Order"
+      data:
+        - name: "orderNumber"
+        - name: "orderDate"
+
+      relations:
+        - name: "investmentAccount"
+          type: "InvestmentAccount"
+          multiplicity: "ManyToOne"
+
+        - name: "security"
+          type: "Security"
+          multiplicity: "ManyToOne"
+
+        - name: "trades"
+          type: "Trade"
+          multiplicity: "OneToMany"
+
+    - name: "Trade"
+      data:
+        - name: "tradeNumber"
+        - name: "tradeDate"
+
+      relations:
+        - name: "order"
+          type: "Order"
+          multiplicity: "ManyToOne"
+
+        - name: "settlement"
+          type: "Settlement"
+          multiplicity: "OneToOne"
+
+    - name: "Settlement"
+      data:
+        - name: "settlementNumber"
+        - name: "settlementDate"
+
+    - name: "Broker"
+      data:
+        - name: "brokerCode"
+        - name: "name"
+
+    - name: "Exchange"
+      data:
+        - name: "exchangeCode"
+        - name: "name"
+
+    - name: "CorporateAction"
+      data:
+        - name: "corporateActionNumber"
+        - name: "effectiveDate"
+
+      relations:
+        - name: "security"
+          type: "Security"
+          multiplicity: "ManyToOne"
+
+    - name: "Dividend"
+      data:
+        - name: "dividendNumber"
+
+      relations:
+        - name: "security"
+          type: "Security"
+          multiplicity: "ManyToOne"
+
+    - name: "MarketData"
+      data:
+        - name: "marketDataDate"
+
+      relations:
+        - name: "security"
+          type: "Security"
+          multiplicity: "ManyToOne"
+
+    - name: "Custodian"
+      data:
+        - name: "custodianCode"
+        - name: "name"
+
+    - name: "ComplianceReview"
+      data:
+        - name: "reviewNumber"
+
+      relations:
+        - name: "investmentAccount"
+          type: "InvestmentAccount"
+          multiplicity: "ManyToOne"
+
+  enums:
+
+    - name: "SecurityType"
+      data:
+        - name: "Equity"
+        - name: "Bond"
+        - name: "ETF"
+        - name: "Option"
+        - name: "MutualFund"
+
+    - name: "OrderType"
+      data:
+        - name: "Market"
+        - name: "Limit"
+        - name: "Stop"
+
+    - name: "OrderStatus"
+      data:
+        - name: "Open"
+        - name: "PartiallyFilled"
+        - name: "Filled"
+        - name: "Cancelled"
+
+    - name: "SettlementStatus"
+      data:
+        - name: "Pending"
+        - name: "Settled"
+        - name: "Failed"
+    ```

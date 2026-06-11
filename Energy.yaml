@@ -1,0 +1,61 @@
+  ```yaml id="n4owkh"
+  entities:
+
+    - name: "EnergyProducer"
+      data:
+        - name: "producerCode"
+
+    - name: "GenerationFacility"
+      data:
+        - name: "facilityCode"
+
+    - name: "PowerUnit"
+      data:
+        - name: "unitCode"
+
+    - name: "GridConnection"
+      data:
+        - name: "connectionCode"
+
+    - name: "TransmissionLine"
+      data:
+        - name: "lineCode"
+
+    - name: "EnergyMarket"
+      data:
+        - name: "marketCode"
+
+    - name: "EnergyTrade"
+      data:
+        - name: "tradeNumber"
+
+    - name: "Forecast"
+      data:
+        - name: "forecastDate"
+
+    - name: "DispatchSchedule"
+      data:
+        - name: "scheduleNumber"
+
+    - name: "MaintenanceEvent"
+      data:
+        - name: "eventNumber"
+
+    - name: "CarbonCredit"
+      data:
+        - name: "creditNumber"
+
+    - name: "EmissionRecord"
+      data:
+        - name: "recordNumber"
+
+  enums:
+
+    - name: "GenerationType"
+      data:
+        - name: "Solar"
+        - name: "Wind"
+        - name: "Hydro"
+        - name: "Nuclear"
+        - name: "Gas"
+    ```

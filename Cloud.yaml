@@ -1,0 +1,59 @@
+  ```yaml
+  entities:
+
+    - name: "CloudAccount"
+      data:
+        - name: "accountNumber"
+        - name: "name"
+
+      relations:
+        - name: "environments"
+          type: "Environment"
+          multiplicity: "OneToMany"
+
+    - name: "Environment"
+      data:
+        - name: "name"
+        - name: "type"
+          type: "EnvironmentType"
+
+      relations:
+        - name: "resources"
+          type: "Resource"
+          multiplicity: "OneToMany"
+
+    - name: "Resource"
+      data:
+        - name: "resourceId"
+        - name: "name"
+        - name: "resourceType"
+          type: "ResourceType"
+
+    - name: "Region"
+      data:
+        - name: "regionCode"
+
+    - name: "Deployment"
+      data:
+        - name: "deploymentNumber"
+        - name: "deploymentDate"
+
+    - name: "Policy"
+      data:
+        - name: "policyName"
+
+  enums:
+    - name: "EnvironmentType"
+      data:
+        - name: "Dev"
+        - name: "Test"
+        - name: "Stage"
+        - name: "Prod"
+
+    - name: "ResourceType"
+      data:
+        - name: "Compute"
+        - name: "Storage"
+        - name: "Network"
+        - name: "Database"
+    ```

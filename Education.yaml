@@ -1,0 +1,54 @@
+  ```yaml
+  entities:
+    - name: "Student"
+      data:
+        - name: "studentNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Teacher"
+      data:
+        - name: "employeeNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Course"
+      data:
+        - name: "courseCode"
+        - name: "title"
+
+    - name: "Enrollment"
+      data:
+        - name: "enrollmentDate"
+        - name: "status"
+          type: "EnrollmentStatus"
+      relations:
+        - name: "student"
+          type: "Student"
+          multiplicity: "ManyToOne"
+        - name: "course"
+          type: "Course"
+          multiplicity: "ManyToOne"
+
+    - name: "Grade"
+      data:
+        - name: "gradeValue"
+      relations:
+        - name: "student"
+          type: "Student"
+          multiplicity: "ManyToOne"
+        - name: "course"
+          type: "Course"
+          multiplicity: "ManyToOne"
+
+    - name: "Department"
+      data:
+        - name: "name"
+
+  enums:
+    - name: "EnrollmentStatus"
+      data:
+        - name: "Active"
+        - name: "Completed"
+        - name: "Withdrawn"
+    ```

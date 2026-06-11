@@ -1,0 +1,49 @@
+  ```yaml
+  entities:
+
+    - name: "Project"
+      data:
+        - name: "projectNumber"
+        - name: "name"
+        - name: "budget"
+
+      relations:
+        - name: "site"
+          type: "Site"
+          multiplicity: "OneToOne"
+        - name: "contractors"
+          type: "Contractor"
+          multiplicity: "OneToMany"
+
+    - name: "Site"
+      data:
+        - name: "siteCode"
+        - name: "address"
+
+    - name: "Contractor"
+      data:
+        - name: "contractorNumber"
+        - name: "name"
+
+    - name: "Inspection"
+      data:
+        - name: "inspectionDate"
+        - name: "result"
+
+    - name: "Permit"
+      data:
+        - name: "permitNumber"
+        - name: "type"
+
+    - name: "Material"
+      data:
+        - name: "materialCode"
+        - name: "description"
+
+  enums:
+    - name: "ProjectType"
+      data:
+        - name: "Residential"
+        - name: "Commercial"
+        - name: "Infrastructure"
+    ```

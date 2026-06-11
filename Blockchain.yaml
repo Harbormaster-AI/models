@@ -1,0 +1,54 @@
+  ```yaml
+  entities:
+
+    - name: "Network"
+      data:
+        - name: "networkId"
+        - name: "name"
+        - name: "type"
+          type: "NetworkType"
+
+      relations:
+        - name: "nodes"
+          type: "Node"
+          multiplicity: "OneToMany"
+        - name: "blocks"
+          type: "Block"
+          multiplicity: "OneToMany"
+
+    - name: "Node"
+      data:
+        - name: "nodeId"
+        - name: "host"
+
+    - name: "Block"
+      data:
+        - name: "blockNumber"
+        - name: "hash"
+
+      relations:
+        - name: "transactions"
+          type: "Transaction"
+          multiplicity: "OneToMany"
+
+    - name: "Transaction"
+      data:
+        - name: "transactionHash"
+        - name: "timestamp"
+
+    - name: "Wallet"
+      data:
+        - name: "walletAddress"
+
+    - name: "SmartContract"
+      data:
+        - name: "contractAddress"
+        - name: "name"
+
+  enums:
+    - name: "NetworkType"
+      data:
+        - name: "Public"
+        - name: "Private"
+        - name: "Consortium"
+    ```

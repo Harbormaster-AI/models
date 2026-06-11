@@ -1,0 +1,213 @@
+  ```yaml
+  valueObjects:
+
+    - name: "PersonName"
+      data:
+        - name: "firstName"
+        - name: "middleName"
+        - name: "lastName"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+    - name: "CompensationRange"
+      data:
+        - name: "minimumSalary"
+        - name: "maximumSalary"
+        - name: "currency"
+
+    - name: "SkillRating"
+      data:
+        - name: "skillName"
+        - name: "rating"
+
+  entities:
+
+    - name: "Candidate"
+      data:
+        - name: "candidateNumber"
+        - name: "candidateStatus"
+          type: "CandidateStatus"
+
+      relations:
+        - name: "resumes"
+          type: "Resume"
+          multiplicity: "OneToMany"
+
+        - name: "applications"
+          type: "Application"
+          multiplicity: "OneToMany"
+
+        - name: "skills"
+          type: "CandidateSkill"
+          multiplicity: "OneToMany"
+
+    - name: "Resume"
+      data:
+        - name: "resumeNumber"
+        - name: "version"
+
+      relations:
+        - name: "candidate"
+          type: "Candidate"
+          multiplicity: "ManyToOne"
+
+    - name: "JobPosting"
+      data:
+        - name: "jobCode"
+        - name: "title"
+        - name: "department"
+
+      relations:
+        - name: "applications"
+          type: "Application"
+          multiplicity: "OneToMany"
+
+    - name: "Application"
+      data:
+        - name: "applicationNumber"
+        - name: "applicationDate"
+
+      relations:
+        - name: "candidate"
+          type: "Candidate"
+          multiplicity: "ManyToOne"
+
+        - name: "jobPosting"
+          type: "JobPosting"
+          multiplicity: "ManyToOne"
+
+        - name: "interviews"
+          type: "Interview"
+          multiplicity: "OneToMany"
+
+    - name: "Interview"
+      data:
+        - name: "interviewNumber"
+        - name: "scheduledDate"
+
+      relations:
+        - name: "application"
+          type: "Application"
+          multiplicity: "ManyToOne"
+
+        - name: "interviewers"
+          type: "Interviewer"
+          multiplicity: "ManyToMany"
+
+    - name: "Interviewer"
+      data:
+        - name: "employeeNumber"
+
+    - name: "Assessment"
+      data:
+        - name: "assessmentNumber"
+
+      relations:
+        - name: "application"
+          type: "Application"
+          multiplicity: "ManyToOne"
+
+    - name: "Offer"
+      data:
+        - name: "offerNumber"
+        - name: "offerDate"
+
+      relations:
+        - name: "application"
+          type: "Application"
+          multiplicity: "OneToOne"
+
+    - name: "HiringManager"
+      data:
+        - name: "managerNumber"
+
+    - name: "Recruiter"
+      data:
+        - name: "recruiterNumber"
+
+    - name: "Department"
+      data:
+        - name: "departmentCode"
+        - name: "name"
+
+    - name: "CandidateSkill"
+      data:
+        - name: "skillName"
+        - name: "yearsExperience"
+
+      relations:
+        - name: "candidate"
+          type: "Candidate"
+          multiplicity: "ManyToOne"
+
+    - name: "ReferenceCheck"
+      data:
+        - name: "referenceCheckNumber"
+
+      relations:
+        - name: "application"
+          type: "Application"
+          multiplicity: "ManyToOne"
+
+    - name: "BackgroundCheck"
+      data:
+        - name: "backgroundCheckNumber"
+
+      relations:
+        - name: "application"
+          type: "Application"
+          multiplicity: "ManyToOne"
+
+    - name: "TalentPool"
+      data:
+        - name: "talentPoolCode"
+        - name: "name"
+
+      relations:
+        - name: "candidates"
+          type: "Candidate"
+          multiplicity: "ManyToMany"
+
+  enums:
+
+    - name: "CandidateStatus"
+      data:
+        - name: "Prospect"
+        - name: "Applied"
+        - name: "Interviewing"
+        - name: "Offered"
+        - name: "Hired"
+        - name: "Rejected"
+
+    - name: "InterviewType"
+      data:
+        - name: "Phone"
+        - name: "Video"
+        - name: "Onsite"
+        - name: "Panel"
+
+    - name: "ApplicationStatus"
+      data:
+        - name: "Submitted"
+        - name: "UnderReview"
+        - name: "Interviewing"
+        - name: "Closed"
+
+    - name: "OfferStatus"
+      data:
+        - name: "Draft"
+        - name: "Extended"
+        - name: "Accepted"
+        - name: "Declined"
+    ```

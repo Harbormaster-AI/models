@@ -1,0 +1,240 @@
+  ```yaml
+  valueObjects:
+
+    - name: "PersonName"
+      data:
+        - name: "firstName"
+        - name: "middleName"
+        - name: "lastName"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "addressLine2"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+        - name: "mobileNumber"
+
+    - name: "Compensation"
+      data:
+        - name: "salary"
+        - name: "currency"
+        - name: "payFrequency"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+  entities:
+
+    - name: "Employee"
+      data:
+        - name: "employeeNumber"
+        - name: "employeeIdentifier"
+        - name: "hireDate"
+        - name: "employmentStatus"
+          type: "EmploymentStatus"
+
+      relations:
+        - name: "department"
+          type: "Department"
+          multiplicity: "ManyToOne"
+
+        - name: "position"
+          type: "Position"
+          multiplicity: "ManyToOne"
+
+        - name: "manager"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+        - name: "performanceReviews"
+          type: "PerformanceReview"
+          multiplicity: "OneToMany"
+
+        - name: "leaveRequests"
+          type: "LeaveRequest"
+          multiplicity: "OneToMany"
+
+        - name: "benefitEnrollments"
+          type: "BenefitEnrollment"
+          multiplicity: "OneToMany"
+
+    - name: "Department"
+      data:
+        - name: "departmentCode"
+        - name: "name"
+
+      relations:
+        - name: "employees"
+          type: "Employee"
+          multiplicity: "OneToMany"
+
+        - name: "positions"
+          type: "Position"
+          multiplicity: "OneToMany"
+
+    - name: "Position"
+      data:
+        - name: "positionCode"
+        - name: "title"
+        - name: "grade"
+
+      relations:
+        - name: "department"
+          type: "Department"
+          multiplicity: "ManyToOne"
+
+    - name: "PerformanceReview"
+      data:
+        - name: "reviewNumber"
+        - name: "reviewDate"
+        - name: "overallScore"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+    - name: "Goal"
+      data:
+        - name: "goalNumber"
+        - name: "description"
+
+      relations:
+        - name: "performanceReview"
+          type: "PerformanceReview"
+          multiplicity: "ManyToOne"
+
+    - name: "BenefitPlan"
+      data:
+        - name: "benefitPlanCode"
+        - name: "name"
+
+      relations:
+        - name: "enrollments"
+          type: "BenefitEnrollment"
+          multiplicity: "OneToMany"
+
+    - name: "BenefitEnrollment"
+      data:
+        - name: "enrollmentNumber"
+        - name: "effectiveDate"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+        - name: "benefitPlan"
+          type: "BenefitPlan"
+          multiplicity: "ManyToOne"
+
+    - name: "LeaveRequest"
+      data:
+        - name: "requestNumber"
+        - name: "startDate"
+        - name: "endDate"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+    - name: "PayrollRecord"
+      data:
+        - name: "payrollNumber"
+        - name: "payDate"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+    - name: "TrainingCourse"
+      data:
+        - name: "courseCode"
+        - name: "name"
+
+    - name: "TrainingEnrollment"
+      data:
+        - name: "trainingEnrollmentNumber"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+        - name: "trainingCourse"
+          type: "TrainingCourse"
+          multiplicity: "ManyToOne"
+
+    - name: "Certification"
+      data:
+        - name: "certificationCode"
+        - name: "name"
+
+    - name: "EmployeeCertification"
+      data:
+        - name: "employeeCertificationNumber"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "ManyToOne"
+
+        - name: "certification"
+          type: "Certification"
+          multiplicity: "ManyToOne"
+
+    - name: "Organization"
+      data:
+        - name: "organizationCode"
+        - name: "name"
+
+    - name: "EmploymentContract"
+      data:
+        - name: "contractNumber"
+
+      relations:
+        - name: "employee"
+          type: "Employee"
+          multiplicity: "OneToOne"
+
+  enums:
+
+    - name: "EmploymentStatus"
+      data:
+        - name: "Active"
+        - name: "Leave"
+        - name: "Terminated"
+        - name: "Retired"
+
+    - name: "LeaveType"
+      data:
+        - name: "Vacation"
+        - name: "Sick"
+        - name: "Personal"
+        - name: "Parental"
+
+    - name: "ReviewRating"
+      data:
+        - name: "Unsatisfactory"
+        - name: "MeetsExpectations"
+        - name: "ExceedsExpectations"
+        - name: "Outstanding"
+
+    - name: "PayFrequency"
+      data:
+        - name: "Weekly"
+        - name: "BiWeekly"
+        - name: "Monthly"
+    ```

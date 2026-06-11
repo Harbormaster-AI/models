@@ -1,0 +1,70 @@
+  ```yaml
+  entities:
+    - name: "Customer"
+      data:
+        - name: "firstName"
+        - name: "lastName"
+        - name: "customerNumber"
+
+    - name: "Account"
+      data:
+        - name: "accountNumber"
+        - name: "balance"
+        - name: "type"
+          type: "AccountType"
+      relations:
+        - name: "owner"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+        - name: "transactions"
+          type: "Transaction"
+          multiplicity: "OneToMany"
+
+    - name: "Transaction"
+      data:
+        - name: "amount"
+        - name: "transactionDate"
+        - name: "type"
+          type: "TransactionType"
+      relations:
+        - name: "account"
+          type: "Account"
+          multiplicity: "ManyToOne"
+
+    - name: "Loan"
+      data:
+        - name: "principal"
+        - name: "interestRate"
+      relations:
+        - name: "borrower"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+
+    - name: "Card"
+      data:
+        - name: "cardNumber"
+        - name: "expirationDate"
+      relations:
+        - name: "account"
+          type: "Account"
+          multiplicity: "ManyToOne"
+
+    - name: "Branch"
+      data:
+        - name: "branchCode"
+        - name: "name"
+
+  enums:
+    - name: "AccountType"
+      data:
+        - name: "Checking"
+        - name: "Savings"
+        - name: "Investment"
+
+    - name: "TransactionType"
+      data:
+        - name: "Deposit"
+        - name: "Withdrawal"
+        - name: "Transfer"
+        - name: "Payment"
+    ```

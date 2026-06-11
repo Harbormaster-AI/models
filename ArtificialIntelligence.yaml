@@ -1,0 +1,68 @@
+  ```yaml
+  entities:
+
+    - name: "Model"
+      data:
+        - name: "modelNumber"
+        - name: "name"
+        - name: "version"
+        - name: "type"
+          type: "ModelType"
+        - name: "accuracy"
+
+      relations:
+        - name: "dataset"
+          type: "Dataset"
+          multiplicity: "ManyToOne"
+        - name: "trainingRuns"
+          type: "TrainingRun"
+          multiplicity: "OneToMany"
+        - name: "features"
+          type: "Feature"
+          multiplicity: "ManyToMany"
+
+    - name: "Dataset"
+      data:
+        - name: "datasetNumber"
+        - name: "name"
+        - name: "recordCount"
+
+    - name: "TrainingRun"
+      data:
+        - name: "trainingDate"
+        - name: "duration"
+        - name: "accuracy"
+
+      relations:
+        - name: "model"
+          type: "Model"
+          multiplicity: "ManyToOne"
+
+    - name: "Inference"
+      data:
+        - name: "requestDate"
+        - name: "responseTime"
+
+      relations:
+        - name: "model"
+          type: "Model"
+          multiplicity: "ManyToOne"
+
+    - name: "Feature"
+      data:
+        - name: "name"
+        - name: "description"
+
+    - name: "Experiment"
+      data:
+        - name: "experimentNumber"
+        - name: "name"
+
+  enums:
+    - name: "ModelType"
+      data:
+        - name: "Classification"
+        - name: "Regression"
+        - name: "Clustering"
+        - name: "Generative"
+    ```

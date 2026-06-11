@@ -1,0 +1,193 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "addressLine2"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+    - name: "TradeTerms"
+      data:
+        - name: "incoterm"
+        - name: "deliveryLocation"
+
+    - name: "BankAccount"
+      data:
+        - name: "accountNumber"
+        - name: "bankCode"
+
+  entities:
+
+    - name: "Importer"
+      data:
+        - name: "importerNumber"
+        - name: "legalName"
+
+      relations:
+        - name: "purchaseOrders"
+          type: "PurchaseOrder"
+          multiplicity: "OneToMany"
+
+        - name: "lettersOfCredit"
+          type: "LetterOfCredit"
+          multiplicity: "OneToMany"
+
+    - name: "Exporter"
+      data:
+        - name: "exporterNumber"
+        - name: "legalName"
+
+      relations:
+        - name: "salesOrders"
+          type: "SalesOrder"
+          multiplicity: "OneToMany"
+
+    - name: "Bank"
+      data:
+        - name: "bankCode"
+        - name: "name"
+
+      relations:
+        - name: "lettersOfCredit"
+          type: "LetterOfCredit"
+          multiplicity: "OneToMany"
+
+        - name: "guarantees"
+          type: "BankGuarantee"
+          multiplicity: "OneToMany"
+
+    - name: "LetterOfCredit"
+      data:
+        - name: "lcNumber"
+        - name: "issueDate"
+        - name: "expirationDate"
+        - name: "status"
+          type: "LetterOfCreditStatus"
+
+      relations:
+        - name: "importer"
+          type: "Importer"
+          multiplicity: "ManyToOne"
+
+        - name: "exporter"
+          type: "Exporter"
+          multiplicity: "ManyToOne"
+
+        - name: "issuingBank"
+          type: "Bank"
+          multiplicity: "ManyToOne"
+
+        - name: "documents"
+          type: "TradeDocument"
+          multiplicity: "OneToMany"
+
+    - name: "PurchaseOrder"
+      data:
+        - name: "purchaseOrderNumber"
+        - name: "orderDate"
+
+      relations:
+        - name: "importer"
+          type: "Importer"
+          multiplicity: "ManyToOne"
+
+    - name: "SalesOrder"
+      data:
+        - name: "salesOrderNumber"
+        - name: "orderDate"
+
+      relations:
+        - name: "exporter"
+          type: "Exporter"
+          multiplicity: "ManyToOne"
+
+    - name: "Shipment"
+      data:
+        - name: "shipmentNumber"
+        - name: "shipDate"
+
+      relations:
+        - name: "billOfLading"
+          type: "BillOfLading"
+          multiplicity: "OneToOne"
+
+    - name: "BillOfLading"
+      data:
+        - name: "billOfLadingNumber"
+        - name: "issueDate"
+
+    - name: "TradeDocument"
+      data:
+        - name: "documentNumber"
+        - name: "documentType"
+
+    - name: "CommercialInvoice"
+      data:
+        - name: "invoiceNumber"
+        - name: "invoiceDate"
+
+    - name: "CustomsDeclaration"
+      data:
+        - name: "declarationNumber"
+
+    - name: "BankGuarantee"
+      data:
+        - name: "guaranteeNumber"
+
+    - name: "Settlement"
+      data:
+        - name: "settlementNumber"
+        - name: "settlementDate"
+
+    - name: "PaymentInstruction"
+      data:
+        - name: "instructionNumber"
+
+    - name: "TradeFinanceFacility"
+      data:
+        - name: "facilityNumber"
+        - name: "creditLimit"
+
+  enums:
+
+    - name: "LetterOfCreditStatus"
+      data:
+        - name: "Draft"
+        - name: "Issued"
+        - name: "Presented"
+        - name: "Paid"
+        - name: "Expired"
+
+    - name: "DocumentType"
+      data:
+        - name: "Invoice"
+        - name: "BillOfLading"
+        - name: "CertificateOfOrigin"
+        - name: "PackingList"
+
+    - name: "SettlementStatus"
+      data:
+        - name: "Pending"
+        - name: "Settled"
+        - name: "Rejected"
+
+    - name: "GuaranteeStatus"
+      data:
+        - name: "Active"
+        - name: "Claimed"
+        - name: "Expired"
+    ```

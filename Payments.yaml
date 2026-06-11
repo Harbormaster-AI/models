@@ -1,0 +1,257 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "addressLine2"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+    - name: "PaymentToken"
+      data:
+        - name: "token"
+        - name: "expirationDate"
+
+    - name: "BankAccount"
+      data:
+        - name: "routingNumber"
+        - name: "accountNumber"
+
+  entities:
+
+    - name: "Merchant"
+      data:
+        - name: "merchantNumber"
+        - name: "name"
+        - name: "taxIdentifier"
+
+      relations:
+        - name: "merchantAccounts"
+          type: "MerchantAccount"
+          multiplicity: "OneToMany"
+
+        - name: "payments"
+          type: "Payment"
+          multiplicity: "OneToMany"
+
+    - name: "Customer"
+      data:
+        - name: "customerNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+      relations:
+        - name: "paymentMethods"
+          type: "PaymentMethod"
+          multiplicity: "OneToMany"
+
+        - name: "payments"
+          type: "Payment"
+          multiplicity: "OneToMany"
+
+    - name: "PaymentMethod"
+      data:
+        - name: "paymentMethodNumber"
+        - name: "nickname"
+        - name: "type"
+          type: "PaymentType"
+
+      relations:
+        - name: "customer"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+
+    - name: "Payment"
+      data:
+        - name: "paymentNumber"
+        - name: "paymentDate"
+        - name: "status"
+          type: "PaymentStatus"
+
+      relations:
+        - name: "merchant"
+          type: "Merchant"
+          multiplicity: "ManyToOne"
+
+        - name: "customer"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+
+        - name: "authorization"
+          type: "Authorization"
+          multiplicity: "OneToOne"
+
+        - name: "settlements"
+          type: "Settlement"
+          multiplicity: "OneToMany"
+
+        - name: "refunds"
+          type: "Refund"
+          multiplicity: "OneToMany"
+
+        - name: "chargebacks"
+          type: "Chargeback"
+          multiplicity: "OneToMany"
+
+        - name: "ledgerEntries"
+          type: "LedgerEntry"
+          multiplicity: "OneToMany"
+
+    - name: "Authorization"
+      data:
+        - name: "authorizationCode"
+        - name: "authorizationDate"
+
+      relations:
+        - name: "payment"
+          type: "Payment"
+          multiplicity: "OneToOne"
+
+        - name: "processor"
+          type: "PaymentProcessor"
+          multiplicity: "ManyToOne"
+
+    - name: "Settlement"
+      data:
+        - name: "settlementNumber"
+        - name: "settlementDate"
+        - name: "status"
+          type: "SettlementStatus"
+
+      relations:
+        - name: "payment"
+          type: "Payment"
+          multiplicity: "ManyToOne"
+
+        - name: "paymentBatch"
+          type: "PaymentBatch"
+          multiplicity: "ManyToOne"
+
+    - name: "Refund"
+      data:
+        - name: "refundNumber"
+        - name: "refundDate"
+
+      relations:
+        - name: "payment"
+          type: "Payment"
+          multiplicity: "ManyToOne"
+
+    - name: "Chargeback"
+      data:
+        - name: "chargebackNumber"
+        - name: "chargebackDate"
+        - name: "status"
+          type: "ChargebackStatus"
+
+      relations:
+        - name: "payment"
+          type: "Payment"
+          multiplicity: "ManyToOne"
+
+    - name: "Invoice"
+      data:
+        - name: "invoiceNumber"
+        - name: "invoiceDate"
+
+      relations:
+        - name: "payments"
+          type: "Payment"
+          multiplicity: "OneToMany"
+
+    - name: "PaymentProcessor"
+      data:
+        - name: "processorCode"
+        - name: "name"
+
+    - name: "MerchantAccount"
+      data:
+        - name: "accountNumber"
+
+      relations:
+        - name: "merchant"
+          type: "Merchant"
+          multiplicity: "ManyToOne"
+
+        - name: "fundingAccount"
+          type: "FundingAccount"
+          multiplicity: "ManyToOne"
+
+    - name: "FundingAccount"
+      data:
+        - name: "fundingAccountNumber"
+
+    - name: "LedgerEntry"
+      data:
+        - name: "entryDate"
+        - name: "entryType"
+
+      relations:
+        - name: "payment"
+          type: "Payment"
+          multiplicity: "ManyToOne"
+
+    - name: "Fee"
+      data:
+        - name: "feeCode"
+        - name: "description"
+
+      relations:
+        - name: "settlement"
+          type: "Settlement"
+          multiplicity: "ManyToOne"
+
+    - name: "PaymentBatch"
+      data:
+        - name: "batchNumber"
+        - name: "batchDate"
+
+  enums:
+
+    - name: "PaymentStatus"
+      data:
+        - name: "Pending"
+        - name: "Authorized"
+        - name: "Captured"
+        - name: "Settled"
+        - name: "Declined"
+
+    - name: "PaymentType"
+      data:
+        - name: "Card"
+        - name: "ACH"
+        - name: "Wire"
+        - name: "Crypto"
+
+    - name: "SettlementStatus"
+      data:
+        - name: "Pending"
+        - name: "Completed"
+        - name: "Failed"
+
+    - name: "ChargebackStatus"
+      data:
+        - name: "Open"
+        - name: "Resolved"
+        - name: "Rejected"
+
+    - name: "CurrencyCode"
+      data:
+        - name: "USD"
+        - name: "EUR"
+        - name: "GBP"
+        - name: "BRL"
+    ```

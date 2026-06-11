@@ -1,0 +1,69 @@
+  ```yaml
+  entities:
+
+    - name: "Campaign"
+      data:
+        - name: "campaignNumber"
+        - name: "name"
+        - name: "startDate"
+        - name: "endDate"
+        - name: "budget"
+        - name: "status"
+          type: "CampaignStatus"
+      relations:
+        - name: "audience"
+          type: "Audience"
+          multiplicity: "ManyToOne"
+        - name: "creatives"
+          type: "Creative"
+          multiplicity: "OneToMany"
+        - name: "channels"
+          type: "Channel"
+          multiplicity: "ManyToMany"
+        - name: "conversions"
+          type: "Conversion"
+          multiplicity: "OneToMany"
+
+    - name: "Audience"
+      data:
+        - name: "audienceNumber"
+        - name: "name"
+        - name: "segment"
+
+    - name: "Creative"
+      data:
+        - name: "creativeNumber"
+        - name: "title"
+        - name: "assetUrl"
+        - name: "type"
+          type: "CreativeType"
+
+    - name: "Channel"
+      data:
+        - name: "channelCode"
+        - name: "name"
+
+    - name: "Impression"
+      data:
+        - name: "impressionDate"
+        - name: "cost"
+
+    - name: "Conversion"
+      data:
+        - name: "conversionDate"
+        - name: "conversionValue"
+
+  enums:
+    - name: "CampaignStatus"
+      data:
+        - name: "Draft"
+        - name: "Active"
+        - name: "Paused"
+        - name: "Completed"
+
+    - name: "CreativeType"
+      data:
+        - name: "Image"
+        - name: "Video"
+        - name: "Text"
+    ```

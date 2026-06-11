@@ -1,0 +1,59 @@
+  ```yaml
+  entities:
+
+    - name: "Farm"
+      data:
+        - name: "farmNumber"
+        - name: "name"
+        - name: "acreage"
+      relations:
+        - name: "fields"
+          type: "Field"
+          multiplicity: "OneToMany"
+        - name: "equipment"
+          type: "Equipment"
+          multiplicity: "OneToMany"
+
+    - name: "Field"
+      data:
+        - name: "fieldNumber"
+        - name: "acreage"
+      relations:
+        - name: "crop"
+          type: "Crop"
+          multiplicity: "ManyToOne"
+
+    - name: "Crop"
+      data:
+        - name: "cropCode"
+        - name: "name"
+        - name: "type"
+          type: "CropType"
+
+    - name: "Harvest"
+      data:
+        - name: "harvestDate"
+        - name: "yieldAmount"
+      relations:
+        - name: "field"
+          type: "Field"
+          multiplicity: "ManyToOne"
+
+    - name: "Equipment"
+      data:
+        - name: "equipmentNumber"
+        - name: "description"
+
+    - name: "Supplier"
+      data:
+        - name: "supplierNumber"
+        - name: "name"
+
+  enums:
+    - name: "CropType"
+      data:
+        - name: "Corn"
+        - name: "Soybean"
+        - name: "Wheat"
+        - name: "Cotton"
+    ```

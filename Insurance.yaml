@@ -1,0 +1,150 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+
+    - name: "PersonName"
+      data:
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+  entities:
+
+    - name: "PolicyHolder"
+      data:
+        - name: "policyHolderNumber"
+
+      relations:
+        - name: "policies"
+          type: "Policy"
+          multiplicity: "OneToMany"
+
+    - name: "Policy"
+      data:
+        - name: "policyNumber"
+        - name: "effectiveDate"
+
+      relations:
+        - name: "policyHolder"
+          type: "PolicyHolder"
+          multiplicity: "ManyToOne"
+
+        - name: "coverages"
+          type: "Coverage"
+          multiplicity: "OneToMany"
+
+        - name: "claims"
+          type: "Claim"
+          multiplicity: "OneToMany"
+
+    - name: "Coverage"
+      data:
+        - name: "coverageCode"
+
+    - name: "Claim"
+      data:
+        - name: "claimNumber"
+
+      relations:
+        - name: "policy"
+          type: "Policy"
+          multiplicity: "ManyToOne"
+
+        - name: "claimItems"
+          type: "ClaimItem"
+          multiplicity: "OneToMany"
+
+    - name: "ClaimItem"
+      data:
+        - name: "claimItemNumber"
+
+    - name: "Beneficiary"
+      data:
+        - name: "beneficiaryNumber"
+
+    - name: "Agent"
+      data:
+        - name: "agentNumber"
+
+    - name: "Broker"
+      data:
+        - name: "brokerNumber"
+
+    - name: "Underwriter"
+      data:
+        - name: "underwriterNumber"
+
+    - name: "RiskAssessment"
+      data:
+        - name: "assessmentNumber"
+
+    - name: "Premium"
+      data:
+        - name: "premiumNumber"
+
+    - name: "Payment"
+      data:
+        - name: "paymentNumber"
+
+    - name: "Renewal"
+      data:
+        - name: "renewalNumber"
+
+    - name: "InsuranceProduct"
+      data:
+        - name: "productCode"
+
+    - name: "LossEvent"
+      data:
+        - name: "lossEventNumber"
+
+  enums:
+
+    - name: "PolicyStatus"
+      data:
+        - name: "Draft"
+        - name: "Active"
+        - name: "Expired"
+        - name: "Cancelled"
+
+    - name: "ClaimStatus"
+      data:
+        - name: "Submitted"
+        - name: "Investigating"
+        - name: "Approved"
+        - name: "Denied"
+
+    - name: "CoverageType"
+      data:
+        - name: "Auto"
+        - name: "Home"
+        - name: "Life"
+        - name: "Health"
+
+    - name: "RiskLevel"
+      data:
+        - name: "Low"
+        - name: "Medium"
+        - name: "High"
+        - name: "Critical"
+    ```

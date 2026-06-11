@@ -1,0 +1,36 @@
+  ```yaml
+  entities:
+
+    - name: "Drug"
+      data:
+        - name: "drugCode"
+        - name: "name"
+
+    - name: "ClinicalTrial"
+      data:
+        - name: "trialNumber"
+
+    - name: "ResearchStudy"
+      data:
+        - name: "studyNumber"
+
+    - name: "Manufacturer"
+      data:
+        - name: "manufacturerCode"
+
+    - name: "Batch"
+      data:
+        - name: "batchNumber"
+
+    - name: "RegulatorySubmission"
+      data:
+        - name: "submissionNumber"
+
+  enums:
+    - name: "TrialPhase"
+      data:
+        - name: "Phase1"
+        - name: "Phase2"
+        - name: "Phase3"
+        - name: "Phase4"
+    ```

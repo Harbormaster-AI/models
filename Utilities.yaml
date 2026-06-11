@@ -1,0 +1,188 @@
+  ```yaml id="utilities-gr-v1"
+  valueObjects:
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "GeoLocation"
+      data:
+        - name: "latitude"
+        - name: "longitude"
+
+    - name: "MeterReadingValue"
+      data:
+        - name: "value"
+        - name: "unitOfMeasure"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+  entities:
+
+    - name: "UtilityProvider"
+      data:
+        - name: "providerCode"
+        - name: "name"
+
+      relations:
+        - name: "serviceTerritories"
+          type: "ServiceTerritory"
+          multiplicity: "OneToMany"
+
+    - name: "Customer"
+      data:
+        - name: "customerNumber"
+
+      relations:
+        - name: "serviceAccounts"
+          type: "ServiceAccount"
+          multiplicity: "OneToMany"
+
+    - name: "ServiceAccount"
+      data:
+        - name: "accountNumber"
+
+      relations:
+        - name: "customer"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+
+        - name: "meters"
+          type: "Meter"
+          multiplicity: "OneToMany"
+
+        - name: "invoices"
+          type: "Invoice"
+          multiplicity: "OneToMany"
+
+    - name: "ServiceLocation"
+      data:
+        - name: "locationCode"
+
+    - name: "Meter"
+      data:
+        - name: "meterNumber"
+
+      relations:
+        - name: "serviceAccount"
+          type: "ServiceAccount"
+          multiplicity: "ManyToOne"
+
+        - name: "meterReadings"
+          type: "MeterReading"
+          multiplicity: "OneToMany"
+
+    - name: "MeterReading"
+      data:
+        - name: "readingDate"
+        - name: "readingValue"
+
+      relations:
+        - name: "meter"
+          type: "Meter"
+          multiplicity: "ManyToOne"
+
+    - name: "Invoice"
+      data:
+        - name: "invoiceNumber"
+
+      relations:
+        - name: "serviceAccount"
+          type: "ServiceAccount"
+          multiplicity: "ManyToOne"
+
+        - name: "payments"
+          type: "Payment"
+          multiplicity: "OneToMany"
+
+    - name: "Payment"
+      data:
+        - name: "paymentNumber"
+
+      relations:
+        - name: "invoice"
+          type: "Invoice"
+          multiplicity: "ManyToOne"
+
+    - name: "RatePlan"
+      data:
+        - name: "ratePlanCode"
+
+    - name: "Outage"
+      data:
+        - name: "outageNumber"
+
+      relations:
+        - name: "serviceTerritory"
+          type: "ServiceTerritory"
+          multiplicity: "ManyToOne"
+
+    - name: "WorkOrder"
+      data:
+        - name: "workOrderNumber"
+
+      relations:
+        - name: "technician"
+          type: "Technician"
+          multiplicity: "ManyToOne"
+
+    - name: "Technician"
+      data:
+        - name: "technicianNumber"
+
+    - name: "ServiceTerritory"
+      data:
+        - name: "territoryCode"
+
+    - name: "Asset"
+      data:
+        - name: "assetNumber"
+
+    - name: "Inspection"
+      data:
+        - name: "inspectionNumber"
+
+      relations:
+        - name: "asset"
+          type: "Asset"
+          multiplicity: "ManyToOne"
+
+  enums:
+
+    - name: "UtilityType"
+      data:
+        - name: "Electric"
+        - name: "Gas"
+        - name: "Water"
+        - name: "Wastewater"
+
+    - name: "MeterStatus"
+      data:
+        - name: "Active"
+        - name: "Inactive"
+        - name: "Removed"
+
+    - name: "OutageStatus"
+      data:
+        - name: "Reported"
+        - name: "Assigned"
+        - name: "Resolved"
+
+    - name: "WorkOrderStatus"
+      data:
+        - name: "Open"
+        - name: "Assigned"
+        - name: "Completed"
+    ```

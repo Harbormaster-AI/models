@@ -1,0 +1,107 @@
+  ```yaml id="n8z2wy"
+  entities:
+
+    - name: "Hotel"
+      data:
+        - name: "hotelCode"
+        - name: "name"
+        - name: "starRating"
+
+      relations:
+        - name: "rooms"
+          type: "Room"
+          multiplicity: "OneToMany"
+        - name: "employees"
+          type: "Employee"
+          multiplicity: "OneToMany"
+
+    - name: "Room"
+      data:
+        - name: "roomNumber"
+        - name: "floor"
+        - name: "type"
+          type: "RoomType"
+
+      relations:
+        - name: "hotel"
+          type: "Hotel"
+          multiplicity: "ManyToOne"
+
+    - name: "Guest"
+      data:
+        - name: "guestNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Reservation"
+      data:
+        - name: "reservationNumber"
+        - name: "checkInDate"
+        - name: "checkOutDate"
+
+      relations:
+        - name: "guest"
+          type: "Guest"
+          multiplicity: "ManyToOne"
+        - name: "room"
+          type: "Room"
+          multiplicity: "ManyToOne"
+
+    - name: "Employee"
+      data:
+        - name: "employeeNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "ServiceRequest"
+      data:
+        - name: "requestNumber"
+        - name: "description"
+
+    - name: "Restaurant"
+      data:
+        - name: "restaurantCode"
+        - name: "name"
+
+    - name: "MenuItem"
+      data:
+        - name: "itemCode"
+        - name: "name"
+        - name: "price"
+
+    - name: "Invoice"
+      data:
+        - name: "invoiceNumber"
+        - name: "amount"
+
+    - name: "Payment"
+      data:
+        - name: "paymentNumber"
+        - name: "amount"
+
+    - name: "Amenity"
+      data:
+        - name: "amenityCode"
+        - name: "name"
+
+    - name: "HousekeepingTask"
+      data:
+        - name: "taskNumber"
+        - name: "scheduledDate"
+
+  enums:
+
+    - name: "RoomType"
+      data:
+        - name: "Standard"
+        - name: "Suite"
+        - name: "Executive"
+        - name: "Penthouse"
+
+    - name: "ReservationStatus"
+      data:
+        - name: "Reserved"
+        - name: "CheckedIn"
+        - name: "CheckedOut"
+        - name: "Cancelled"
+    ```

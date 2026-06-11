@@ -1,0 +1,56 @@
+  ```yaml
+  entities:
+    - name: "Citizen"
+      data:
+        - name: "citizenNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Agency"
+      data:
+        - name: "agencyCode"
+        - name: "name"
+
+    - name: "Permit"
+      data:
+        - name: "permitNumber"
+        - name: "type"
+          type: "PermitType"
+      relations:
+        - name: "citizen"
+          type: "Citizen"
+          multiplicity: "ManyToOne"
+
+    - name: "Application"
+      data:
+        - name: "applicationNumber"
+        - name: "submissionDate"
+      relations:
+        - name: "agency"
+          type: "Agency"
+          multiplicity: "ManyToOne"
+
+    - name: "Inspection"
+      data:
+        - name: "inspectionDate"
+        - name: "result"
+
+    - name: "Case"
+      data:
+        - name: "caseNumber"
+        - name: "status"
+          type: "CaseStatus"
+
+  enums:
+    - name: "PermitType"
+      data:
+        - name: "Building"
+        - name: "Business"
+        - name: "Environmental"
+
+    - name: "CaseStatus"
+      data:
+        - name: "Open"
+        - name: "Closed"
+        - name: "Pending"
+    ```

@@ -1,0 +1,88 @@
+  ```yaml
+  entities:
+
+    - name: "Device"
+      data:
+        - name: "deviceId"
+        - name: "name"
+        - name: "status"
+
+      relations:
+        - name: "sensors"
+          type: "Sensor"
+          multiplicity: "OneToMany"
+
+    - name: "Sensor"
+      data:
+        - name: "sensorId"
+        - name: "type"
+
+      relations:
+        - name: "device"
+          type: "Device"
+          multiplicity: "ManyToOne"
+
+    - name: "Gateway"
+      data:
+        - name: "gatewayId"
+
+    - name: "Telemetry"
+      data:
+        - name: "timestamp"
+        - name: "value"
+
+      relations:
+        - name: "sensor"
+          type: "Sensor"
+          multiplicity: "ManyToOne"
+
+    - name: "Alert"
+      data:
+        - name: "alertNumber"
+        - name: "message"
+
+    - name: "Rule"
+      data:
+        - name: "ruleNumber"
+        - name: "expression"
+
+    - name: "Firmware"
+      data:
+        - name: "version"
+
+    - name: "Location"
+      data:
+        - name: "latitude"
+        - name: "longitude"
+
+    - name: "Command"
+      data:
+        - name: "commandNumber"
+
+    - name: "DeviceGroup"
+      data:
+        - name: "groupName"
+
+    - name: "DigitalTwin"
+      data:
+        - name: "twinId"
+
+    - name: "MaintenanceEvent"
+      data:
+        - name: "eventDate"
+
+  enums:
+
+    - name: "DeviceStatus"
+      data:
+        - name: "Online"
+        - name: "Offline"
+        - name: "Maintenance"
+
+    - name: "SensorType"
+      data:
+        - name: "Temperature"
+        - name: "Pressure"
+        - name: "Humidity"
+        - name: "Motion"
+    ```

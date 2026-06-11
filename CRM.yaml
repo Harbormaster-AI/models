@@ -1,0 +1,203 @@
+  ```yaml
+  valueObjects:
+
+    - name: "PersonName"
+      data:
+        - name: "firstName"
+        - name: "middleName"
+        - name: "lastName"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "addressLine2"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+        - name: "mobileNumber"
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+  entities:
+
+    - name: "Customer"
+      data:
+        - name: "customerNumber"
+        - name: "customerName"
+        - name: "industry"
+
+      relations:
+        - name: "accounts"
+          type: "Account"
+          multiplicity: "OneToMany"
+
+        - name: "contacts"
+          type: "Contact"
+          multiplicity: "OneToMany"
+
+        - name: "opportunities"
+          type: "Opportunity"
+          multiplicity: "OneToMany"
+
+    - name: "Account"
+      data:
+        - name: "accountNumber"
+        - name: "name"
+
+      relations:
+        - name: "customer"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+
+        - name: "activities"
+          type: "Activity"
+          multiplicity: "OneToMany"
+
+    - name: "Contact"
+      data:
+        - name: "contactNumber"
+        - name: "jobTitle"
+
+      relations:
+        - name: "account"
+          type: "Account"
+          multiplicity: "ManyToOne"
+
+        - name: "cases"
+          type: "Case"
+          multiplicity: "OneToMany"
+
+    - name: "Lead"
+      data:
+        - name: "leadNumber"
+        - name: "source"
+
+      relations:
+        - name: "campaign"
+          type: "Campaign"
+          multiplicity: "ManyToOne"
+
+    - name: "Opportunity"
+      data:
+        - name: "opportunityNumber"
+        - name: "description"
+        - name: "expectedRevenue"
+
+      relations:
+        - name: "account"
+          type: "Account"
+          multiplicity: "ManyToOne"
+
+        - name: "quotes"
+          type: "Quote"
+          multiplicity: "OneToMany"
+
+    - name: "Quote"
+      data:
+        - name: "quoteNumber"
+        - name: "expirationDate"
+
+      relations:
+        - name: "opportunity"
+          type: "Opportunity"
+          multiplicity: "ManyToOne"
+
+    - name: "Campaign"
+      data:
+        - name: "campaignNumber"
+        - name: "name"
+        - name: "budget"
+
+      relations:
+        - name: "leads"
+          type: "Lead"
+          multiplicity: "OneToMany"
+
+    - name: "Activity"
+      data:
+        - name: "activityNumber"
+        - name: "activityDate"
+
+    - name: "Case"
+      data:
+        - name: "caseNumber"
+        - name: "description"
+
+      relations:
+        - name: "contact"
+          type: "Contact"
+          multiplicity: "ManyToOne"
+
+    - name: "SalesRepresentative"
+      data:
+        - name: "employeeNumber"
+
+      relations:
+        - name: "opportunities"
+          type: "Opportunity"
+          multiplicity: "OneToMany"
+
+    - name: "Territory"
+      data:
+        - name: "territoryCode"
+
+    - name: "Contract"
+      data:
+        - name: "contractNumber"
+
+    - name: "Product"
+      data:
+        - name: "productCode"
+        - name: "name"
+
+    - name: "PriceBook"
+      data:
+        - name: "priceBookCode"
+
+    - name: "CustomerInteraction"
+      data:
+        - name: "interactionNumber"
+
+  enums:
+
+    - name: "LeadStatus"
+      data:
+        - name: "New"
+        - name: "Qualified"
+        - name: "Converted"
+        - name: "Rejected"
+
+    - name: "OpportunityStatus"
+      data:
+        - name: "Open"
+        - name: "Won"
+        - name: "Lost"
+
+    - name: "CaseStatus"
+      data:
+        - name: "Open"
+        - name: "InProgress"
+        - name: "Resolved"
+        - name: "Closed"
+
+    - name: "ActivityType"
+      data:
+        - name: "Call"
+        - name: "Meeting"
+        - name: "Email"
+        - name: "Task"
+    ```

@@ -1,0 +1,60 @@
+  ```yaml
+  entities:
+    - name: "Property"
+      data:
+        - name: "propertyNumber"
+        - name: "address"
+        - name: "type"
+          type: "PropertyType"
+
+    - name: "Listing"
+      data:
+        - name: "listingNumber"
+        - name: "askingPrice"
+        - name: "listingDate"
+      relations:
+        - name: "property"
+          type: "Property"
+          multiplicity: "OneToOne"
+
+    - name: "Agent"
+      data:
+        - name: "licenseNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Buyer"
+      data:
+        - name: "buyerNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Seller"
+      data:
+        - name: "sellerNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Contract"
+      data:
+        - name: "contractNumber"
+        - name: "effectiveDate"
+      relations:
+        - name: "buyer"
+          type: "Buyer"
+          multiplicity: "ManyToOne"
+        - name: "seller"
+          type: "Seller"
+          multiplicity: "ManyToOne"
+        - name: "property"
+          type: "Property"
+          multiplicity: "OneToOne"
+
+  enums:
+    - name: "PropertyType"
+      data:
+        - name: "Residential"
+        - name: "Commercial"
+        - name: "Industrial"
+        - name: "Land"
+    ```

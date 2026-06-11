@@ -1,0 +1,60 @@
+  ```yaml
+  entities:
+
+    - name: "Vehicle"
+      data:
+        - name: "vin"
+        - name: "model"
+        - name: "year"
+        - name: "type"
+          type: "VehicleType"
+
+      relations:
+        - name: "manufacturer"
+          type: "Manufacturer"
+          multiplicity: "ManyToOne"
+        - name: "serviceRecords"
+          type: "ServiceRecord"
+          multiplicity: "OneToMany"
+        - name: "components"
+          type: "Component"
+          multiplicity: "OneToMany"
+
+    - name: "Manufacturer"
+      data:
+        - name: "manufacturerCode"
+        - name: "name"
+
+    - name: "Dealership"
+      data:
+        - name: "dealerCode"
+        - name: "name"
+
+    - name: "ServiceRecord"
+      data:
+        - name: "serviceDate"
+        - name: "description"
+
+      relations:
+        - name: "vehicle"
+          type: "Vehicle"
+          multiplicity: "ManyToOne"
+
+    - name: "Component"
+      data:
+        - name: "partNumber"
+        - name: "description"
+
+    - name: "Recall"
+      data:
+        - name: "recallNumber"
+        - name: "description"
+
+  enums:
+    - name: "VehicleType"
+      data:
+        - name: "Sedan"
+        - name: "SUV"
+        - name: "Truck"
+        - name: "EV"
+    ```

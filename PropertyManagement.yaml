@@ -1,0 +1,252 @@
+  ```yaml id="property-gr-v1"
+  valueObjects:
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "addressLine2"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+    - name: "PersonName"
+      data:
+        - name: "firstName"
+        - name: "middleName"
+        - name: "lastName"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+  entities:
+
+    - name: "Property"
+      data:
+        - name: "propertyNumber"
+        - name: "propertyName"
+        - name: "type"
+          type: "PropertyType"
+
+      relations:
+        - name: "buildings"
+          type: "Building"
+          multiplicity: "OneToMany"
+
+        - name: "propertyManager"
+          type: "PropertyManager"
+          multiplicity: "ManyToOne"
+
+    - name: "Building"
+      data:
+        - name: "buildingCode"
+        - name: "name"
+
+      relations:
+        - name: "property"
+          type: "Property"
+          multiplicity: "ManyToOne"
+
+        - name: "units"
+          type: "Unit"
+          multiplicity: "OneToMany"
+
+    - name: "Unit"
+      data:
+        - name: "unitNumber"
+        - name: "floor"
+
+      relations:
+        - name: "building"
+          type: "Building"
+          multiplicity: "ManyToOne"
+
+        - name: "leases"
+          type: "Lease"
+          multiplicity: "OneToMany"
+
+        - name: "maintenanceRequests"
+          type: "MaintenanceRequest"
+          multiplicity: "OneToMany"
+
+    - name: "Tenant"
+      data:
+        - name: "tenantNumber"
+        - name: "status"
+          type: "TenantStatus"
+
+      relations:
+        - name: "leases"
+          type: "Lease"
+          multiplicity: "OneToMany"
+
+    - name: "Lease"
+      data:
+        - name: "leaseNumber"
+        - name: "startDate"
+        - name: "endDate"
+
+      relations:
+        - name: "tenant"
+          type: "Tenant"
+          multiplicity: "ManyToOne"
+
+        - name: "unit"
+          type: "Unit"
+          multiplicity: "ManyToOne"
+
+        - name: "payments"
+          type: "RentPayment"
+          multiplicity: "OneToMany"
+
+    - name: "RentPayment"
+      data:
+        - name: "paymentNumber"
+        - name: "paymentDate"
+
+      relations:
+        - name: "lease"
+          type: "Lease"
+          multiplicity: "ManyToOne"
+
+    - name: "PropertyManager"
+      data:
+        - name: "managerNumber"
+        - name: "name"
+
+      relations:
+        - name: "properties"
+          type: "Property"
+          multiplicity: "OneToMany"
+
+    - name: "MaintenanceRequest"
+      data:
+        - name: "requestNumber"
+        - name: "description"
+
+      relations:
+        - name: "unit"
+          type: "Unit"
+          multiplicity: "ManyToOne"
+
+        - name: "workOrders"
+          type: "WorkOrder"
+          multiplicity: "OneToMany"
+
+    - name: "WorkOrder"
+      data:
+        - name: "workOrderNumber"
+
+      relations:
+        - name: "maintenanceRequest"
+          type: "MaintenanceRequest"
+          multiplicity: "ManyToOne"
+
+        - name: "vendor"
+          type: "Vendor"
+          multiplicity: "ManyToOne"
+
+    - name: "Vendor"
+      data:
+        - name: "vendorNumber"
+        - name: "name"
+
+    - name: "Inspection"
+      data:
+        - name: "inspectionNumber"
+        - name: "inspectionDate"
+
+      relations:
+        - name: "property"
+          type: "Property"
+          multiplicity: "ManyToOne"
+
+    - name: "Amenity"
+      data:
+        - name: "amenityCode"
+        - name: "name"
+
+      relations:
+        - name: "properties"
+          type: "Property"
+          multiplicity: "ManyToMany"
+
+    - name: "Reservation"
+      data:
+        - name: "reservationNumber"
+
+      relations:
+        - name: "amenity"
+          type: "Amenity"
+          multiplicity: "ManyToOne"
+
+        - name: "tenant"
+          type: "Tenant"
+          multiplicity: "ManyToOne"
+
+    - name: "UtilityAccount"
+      data:
+        - name: "utilityAccountNumber"
+
+      relations:
+        - name: "property"
+          type: "Property"
+          multiplicity: "ManyToOne"
+
+    - name: "InsurancePolicy"
+      data:
+        - name: "policyNumber"
+
+      relations:
+        - name: "property"
+          type: "Property"
+          multiplicity: "ManyToOne"
+
+  enums:
+
+    - name: "PropertyType"
+      data:
+        - name: "Residential"
+        - name: "Commercial"
+        - name: "MixedUse"
+        - name: "Industrial"
+
+    - name: "TenantStatus"
+      data:
+        - name: "Active"
+        - name: "PastDue"
+        - name: "Evicted"
+        - name: "Former"
+
+    - name: "LeaseStatus"
+      data:
+        - name: "Draft"
+        - name: "Active"
+        - name: "Expired"
+        - name: "Terminated"
+
+    - name: "MaintenanceStatus"
+      data:
+        - name: "Requested"
+        - name: "Assigned"
+        - name: "Completed"
+        - name: "Cancelled"
+
+    - name: "InspectionResult"
+      data:
+        - name: "Pass"
+        - name: "PassWithConditions"
+        - name: "Fail"
+    ```

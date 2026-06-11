@@ -1,0 +1,63 @@
+  ```yaml
+  entities:
+
+    - name: "Aircraft"
+      data:
+        - name: "tailNumber"
+        - name: "serialNumber"
+        - name: "manufacturer"
+        - name: "model"
+        - name: "type"
+          type: "AircraftType"
+      relations:
+        - name: "components"
+          type: "Component"
+          multiplicity: "OneToMany"
+        - name: "maintenanceRecords"
+          type: "MaintenanceRecord"
+          multiplicity: "OneToMany"
+
+    - name: "Component"
+      data:
+        - name: "partNumber"
+        - name: "description"
+        - name: "manufacturer"
+
+    - name: "MaintenanceRecord"
+      data:
+        - name: "maintenanceDate"
+        - name: "description"
+      relations:
+        - name: "aircraft"
+          type: "Aircraft"
+          multiplicity: "ManyToOne"
+
+    - name: "Flight"
+      data:
+        - name: "flightNumber"
+        - name: "departureTime"
+        - name: "arrivalTime"
+      relations:
+        - name: "aircraft"
+          type: "Aircraft"
+          multiplicity: "ManyToOne"
+
+    - name: "Crew"
+      data:
+        - name: "employeeNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "Inspection"
+      data:
+        - name: "inspectionDate"
+        - name: "result"
+
+  enums:
+    - name: "AircraftType"
+      data:
+        - name: "Commercial"
+        - name: "Military"
+        - name: "Cargo"
+        - name: "Private"
+    ```

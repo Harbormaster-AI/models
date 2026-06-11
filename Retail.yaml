@@ -1,0 +1,79 @@
+  ```yaml
+  entities:
+    - name: "Customer"
+      data:
+        - name: "customerNumber"
+        - name: "firstName"
+        - name: "lastName"
+        - name: "email"
+      relations:
+        - name: "orders"
+          type: "Order"
+          multiplicity: "OneToMany"
+
+    - name: "Product"
+      data:
+        - name: "sku"
+        - name: "name"
+        - name: "price"
+        - name: "type"
+          type: "ProductType"
+      relations:
+        - name: "inventory"
+          type: "Inventory"
+          multiplicity: "OneToOne"
+
+    - name: "Inventory"
+      data:
+        - name: "quantityOnHand"
+        - name: "reorderLevel"
+      relations:
+        - name: "product"
+          type: "Product"
+          multiplicity: "OneToOne"
+
+    - name: "Order"
+      data:
+        - name: "orderNumber"
+        - name: "orderDate"
+        - name: "status"
+          type: "OrderStatus"
+      relations:
+        - name: "customer"
+          type: "Customer"
+          multiplicity: "ManyToOne"
+        - name: "orderLines"
+          type: "OrderLine"
+          multiplicity: "OneToMany"
+
+    - name: "OrderLine"
+      data:
+        - name: "quantity"
+        - name: "unitPrice"
+      relations:
+        - name: "order"
+          type: "Order"
+          multiplicity: "ManyToOne"
+        - name: "product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "Store"
+      data:
+        - name: "storeNumber"
+        - name: "name"
+
+  enums:
+    - name: "ProductType"
+      data:
+        - name: "Physical"
+        - name: "Digital"
+        - name: "Service"
+
+    - name: "OrderStatus"
+      data:
+        - name: "Pending"
+        - name: "Processing"
+        - name: "Completed"
+        - name: "Cancelled"
+    ```

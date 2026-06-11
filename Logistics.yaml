@@ -1,0 +1,42 @@
+  ```yaml
+  entities:
+
+    - name: "Shipment"
+      data:
+        - name: "shipmentNumber"
+        - name: "shipDate"
+
+      relations:
+        - name: "packages"
+          type: "Package"
+          multiplicity: "OneToMany"
+
+    - name: "Package"
+      data:
+        - name: "trackingNumber"
+        - name: "weight"
+
+    - name: "Carrier"
+      data:
+        - name: "carrierCode"
+        - name: "name"
+
+    - name: "Route"
+      data:
+        - name: "routeCode"
+
+    - name: "Warehouse"
+      data:
+        - name: "warehouseCode"
+
+    - name: "Delivery"
+      data:
+        - name: "deliveryDate"
+
+  enums:
+    - name: "ShipmentStatus"
+      data:
+        - name: "Created"
+        - name: "InTransit"
+        - name: "Delivered"
+    ```

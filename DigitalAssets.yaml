@@ -1,0 +1,219 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "country"
+
+    - name: "WalletAddress"
+      data:
+        - name: "address"
+        - name: "network"
+
+    - name: "TokenQuantity"
+      data:
+        - name: "quantity"
+        - name: "precision"
+
+    - name: "CustodyReference"
+      data:
+        - name: "referenceNumber"
+
+  entities:
+
+    - name: "Issuer"
+      data:
+        - name: "issuerNumber"
+        - name: "legalName"
+
+      relations:
+        - name: "digitalAssets"
+          type: "DigitalAsset"
+          multiplicity: "OneToMany"
+
+    - name: "DigitalAsset"
+      data:
+        - name: "assetCode"
+        - name: "name"
+        - name: "symbol"
+        - name: "type"
+          type: "AssetType"
+
+      relations:
+        - name: "issuer"
+          type: "Issuer"
+          multiplicity: "ManyToOne"
+
+        - name: "tokenPolicy"
+          type: "TokenPolicy"
+          multiplicity: "OneToOne"
+
+        - name: "holdings"
+          type: "Holding"
+          multiplicity: "OneToMany"
+
+    - name: "Investor"
+      data:
+        - name: "investorNumber"
+        - name: "legalName"
+
+      relations:
+        - name: "wallets"
+          type: "Wallet"
+          multiplicity: "OneToMany"
+
+        - name: "orders"
+          type: "Order"
+          multiplicity: "OneToMany"
+
+    - name: "Wallet"
+      data:
+        - name: "walletNumber"
+
+      relations:
+        - name: "investor"
+          type: "Investor"
+          multiplicity: "ManyToOne"
+
+        - name: "holdings"
+          type: "Holding"
+          multiplicity: "OneToMany"
+
+    - name: "Holding"
+      data:
+        - name: "holdingNumber"
+
+      relations:
+        - name: "wallet"
+          type: "Wallet"
+          multiplicity: "ManyToOne"
+
+        - name: "asset"
+          type: "DigitalAsset"
+          multiplicity: "ManyToOne"
+
+    - name: "Exchange"
+      data:
+        - name: "exchangeCode"
+        - name: "name"
+
+    - name: "Order"
+      data:
+        - name: "orderNumber"
+        - name: "quantity"
+        - name: "price"
+
+      relations:
+        - name: "exchange"
+          type: "Exchange"
+          multiplicity: "ManyToOne"
+
+        - name: "investor"
+          type: "Investor"
+          multiplicity: "ManyToOne"
+
+    - name: "Trade"
+      data:
+        - name: "tradeNumber"
+        - name: "tradeDate"
+
+      relations:
+        - name: "buyOrder"
+          type: "Order"
+          multiplicity: "ManyToOne"
+
+        - name: "sellOrder"
+          type: "Order"
+          multiplicity: "ManyToOne"
+
+    - name: "Custodian"
+      data:
+        - name: "custodianCode"
+        - name: "name"
+
+    - name: "Settlement"
+      data:
+        - name: "settlementNumber"
+        - name: "settlementDate"
+
+      relations:
+        - name: "trade"
+          type: "Trade"
+          multiplicity: "OneToOne"
+
+    - name: "TokenPolicy"
+      data:
+        - name: "policyNumber"
+        - name: "maxSupply"
+
+    - name: "CorporateAction"
+      data:
+        - name: "actionNumber"
+        - name: "effectiveDate"
+
+    - name: "AssetTransaction"
+      data:
+        - name: "transactionHash"
+        - name: "transactionDate"
+
+      relations:
+        - name: "wallet"
+          type: "Wallet"
+          multiplicity: "ManyToOne"
+
+        - name: "asset"
+          type: "DigitalAsset"
+          multiplicity: "ManyToOne"
+
+    - name: "Network"
+      data:
+        - name: "networkCode"
+        - name: "name"
+
+    - name: "Node"
+      data:
+        - name: "nodeNumber"
+
+      relations:
+        - name: "network"
+          type: "Network"
+          multiplicity: "ManyToOne"
+
+  enums:
+
+    - name: "AssetType"
+      data:
+        - name: "SecurityToken"
+        - name: "Stablecoin"
+        - name: "UtilityToken"
+        - name: "CBDC"
+
+    - name: "OrderType"
+      data:
+        - name: "Market"
+        - name: "Limit"
+
+    - name: "OrderStatus"
+      data:
+        - name: "Open"
+        - name: "Filled"
+        - name: "Cancelled"
+
+    - name: "SettlementStatus"
+      data:
+        - name: "Pending"
+        - name: "Completed"
+
+    - name: "CorporateActionType"
+      data:
+        - name: "Dividend"
+        - name: "Split"
+        - name: "Redemption"
+    ```

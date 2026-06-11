@@ -1,0 +1,181 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "ContactInformation"
+      data:
+        - name: "email"
+        - name: "phoneNumber"
+
+    - name: "Quantity"
+      data:
+        - name: "amount"
+        - name: "unitOfMeasure"
+
+    - name: "DateRange"
+      data:
+        - name: "startDate"
+        - name: "endDate"
+
+  entities:
+
+    - name: "Organization"
+      data:
+        - name: "organizationCode"
+        - name: "name"
+
+      relations:
+        - name: "departments"
+          type: "Department"
+          multiplicity: "OneToMany"
+
+    - name: "Department"
+      data:
+        - name: "departmentCode"
+        - name: "name"
+
+      relations:
+        - name: "organization"
+          type: "Organization"
+          multiplicity: "ManyToOne"
+
+        - name: "employees"
+          type: "Employee"
+          multiplicity: "OneToMany"
+
+    - name: "Employee"
+      data:
+        - name: "employeeNumber"
+        - name: "jobTitle"
+
+      relations:
+        - name: "department"
+          type: "Department"
+          multiplicity: "ManyToOne"
+
+    - name: "Vendor"
+      data:
+        - name: "vendorNumber"
+        - name: "name"
+
+      relations:
+        - name: "purchaseOrders"
+          type: "PurchaseOrder"
+          multiplicity: "OneToMany"
+
+    - name: "PurchaseOrder"
+      data:
+        - name: "purchaseOrderNumber"
+        - name: "orderDate"
+
+      relations:
+        - name: "vendor"
+          type: "Vendor"
+          multiplicity: "ManyToOne"
+
+        - name: "purchaseOrderLines"
+          type: "PurchaseOrderLine"
+          multiplicity: "OneToMany"
+
+    - name: "PurchaseOrderLine"
+      data:
+        - name: "lineNumber"
+        - name: "quantity"
+
+      relations:
+        - name: "purchaseOrder"
+          type: "PurchaseOrder"
+          multiplicity: "ManyToOne"
+
+        - name: "Product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "Product"
+      data:
+        - name: "productCode"
+        - name: "name"
+
+    - name: "Inventory"
+      data:
+        - name: "inventoryNumber"
+
+    - name: "Warehouse"
+      data:
+        - name: "warehouseCode"
+
+      relations:
+        - name: "inventory"
+          type: "Inventory"
+          multiplicity: "OneToMany"
+
+    - name: "Invoice"
+      data:
+        - name: "invoiceNumber"
+        - name: "invoiceDate"
+
+    - name: "AccountsPayable"
+      data:
+        - name: "accountsPayableNumber"
+
+    - name: "AccountsReceivable"
+      data:
+        - name: "accountsReceivableNumber"
+
+    - name: "GeneralLedger"
+      data:
+        - name: "ledgerCode"
+
+    - name: "JournalEntry"
+      data:
+        - name: "journalEntryNumber"
+
+      relations:
+        - name: "ledger"
+          type: "GeneralLedger"
+          multiplicity: "ManyToOne"
+
+    - name: "FixedAsset"
+      data:
+        - name: "assetNumber"
+        - name: "description"
+
+  enums:
+
+    - name: "PurchaseOrderStatus"
+      data:
+        - name: "Draft"
+        - name: "Approved"
+        - name: "Received"
+        - name: "Closed"
+
+    - name: "InvoiceStatus"
+      data:
+        - name: "Draft"
+        - name: "Issued"
+        - name: "Paid"
+        - name: "Cancelled"
+
+    - name: "AssetStatus"
+      data:
+        - name: "Active"
+        - name: "Disposed"
+        - name: "Retired"
+
+    - name: "JournalEntryType"
+      data:
+        - name: "Debit"
+        - name: "Credit"
+    ```

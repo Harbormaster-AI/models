@@ -1,0 +1,82 @@
+  ```yaml id="0w0d53"
+  entities:
+
+    - name: "Campaign"
+      data:
+        - name: "campaignNumber"
+        - name: "name"
+        - name: "budget"
+
+      relations:
+        - name: "segments"
+          type: "AudienceSegment"
+          multiplicity: "ManyToMany"
+
+    - name: "AudienceSegment"
+      data:
+        - name: "segmentCode"
+        - name: "name"
+
+    - name: "Lead"
+      data:
+        - name: "leadNumber"
+        - name: "email"
+
+    - name: "Prospect"
+      data:
+        - name: "prospectNumber"
+        - name: "name"
+
+    - name: "Customer"
+      data:
+        - name: "customerNumber"
+        - name: "name"
+
+    - name: "MarketingChannel"
+      data:
+        - name: "channelCode"
+        - name: "name"
+
+    - name: "ContentAsset"
+      data:
+        - name: "assetCode"
+        - name: "title"
+
+    - name: "LandingPage"
+      data:
+        - name: "pageCode"
+
+    - name: "Conversion"
+      data:
+        - name: "conversionNumber"
+        - name: "conversionDate"
+
+    - name: "EmailCampaign"
+      data:
+        - name: "emailCampaignCode"
+
+    - name: "SocialPost"
+      data:
+        - name: "postNumber"
+
+    - name: "MarketingMetric"
+      data:
+        - name: "metricDate"
+        - name: "value"
+
+  enums:
+
+    - name: "CampaignStatus"
+      data:
+        - name: "Draft"
+        - name: "Active"
+        - name: "Paused"
+        - name: "Completed"
+
+    - name: "ChannelType"
+      data:
+        - name: "Email"
+        - name: "Social"
+        - name: "Search"
+        - name: "Display"
+    ```

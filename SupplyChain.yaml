@@ -1,0 +1,230 @@
+  ```yaml
+  valueObjects:
+
+    - name: "Address"
+      data:
+        - name: "addressLine1"
+        - name: "city"
+        - name: "state"
+        - name: "postalCode"
+        - name: "country"
+
+    - name: "Money"
+      data:
+        - name: "amount"
+        - name: "currency"
+
+    - name: "Quantity"
+      data:
+        - name: "amount"
+        - name: "unitOfMeasure"
+
+    - name: "Weight"
+      data:
+        - name: "amount"
+        - name: "unit"
+
+    - name: "Dimensions"
+      data:
+        - name: "length"
+        - name: "width"
+        - name: "height"
+
+  entities:
+
+    - name: "Supplier"
+      data:
+        - name: "supplierNumber"
+        - name: "name"
+
+      relations:
+        - name: "purchaseOrders"
+          type: "PurchaseOrder"
+          multiplicity: "OneToMany"
+
+        - name: "shipments"
+          type: "Shipment"
+          multiplicity: "OneToMany"
+
+    - name: "PurchaseOrder"
+      data:
+        - name: "purchaseOrderNumber"
+        - name: "orderDate"
+        - name: "status"
+          type: "PurchaseOrderStatus"
+
+      relations:
+        - name: "supplier"
+          type: "Supplier"
+          multiplicity: "ManyToOne"
+
+        - name: "lines"
+          type: "PurchaseOrderLine"
+          multiplicity: "OneToMany"
+
+    - name: "PurchaseOrderLine"
+      data:
+        - name: "lineNumber"
+        - name: "quantity"
+
+      relations:
+        - name: "purchaseOrder"
+          type: "PurchaseOrder"
+          multiplicity: "ManyToOne"
+
+        - name: "product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "Product"
+      data:
+        - name: "sku"
+        - name: "name"
+
+    - name: "Warehouse"
+      data:
+        - name: "warehouseCode"
+        - name: "name"
+
+      relations:
+        - name: "inventoryBalances"
+          type: "InventoryBalance"
+          multiplicity: "OneToMany"
+
+    - name: "InventoryItem"
+      data:
+        - name: "inventoryItemNumber"
+
+    - name: "InventoryBalance"
+      data:
+        - name: "quantityOnHand"
+
+      relations:
+        - name: "warehouse"
+          type: "Warehouse"
+          multiplicity: "ManyToOne"
+
+        - name: "inventoryItem"
+          type: "InventoryItem"
+          multiplicity: "ManyToOne"
+
+    - name: "Shipment"
+      data:
+        - name: "shipmentNumber"
+        - name: "shipmentDate"
+        - name: "status"
+          type: "ShipmentStatus"
+
+      relations:
+        - name: "supplier"
+          type: "Supplier"
+          multiplicity: "ManyToOne"
+
+        - name: "carrier"
+          type: "Carrier"
+          multiplicity: "ManyToOne"
+
+        - name: "shipmentLines"
+          type: "ShipmentLine"
+          multiplicity: "OneToMany"
+
+    - name: "ShipmentLine"
+      data:
+        - name: "lineNumber"
+
+      relations:
+        - name: "shipment"
+          type: "Shipment"
+          multiplicity: "ManyToOne"
+
+        - name: "product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "Carrier"
+      data:
+        - name: "carrierCode"
+        - name: "name"
+
+    - name: "DistributionCenter"
+      data:
+        - name: "distributionCenterCode"
+
+      relations:
+        - name: "warehouses"
+          type: "Warehouse"
+          multiplicity: "OneToMany"
+
+    - name: "Forecast"
+      data:
+        - name: "forecastNumber"
+        - name: "forecastDate"
+
+      relations:
+        - name: "product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "ReplenishmentOrder"
+      data:
+        - name: "replenishmentOrderNumber"
+
+      relations:
+        - name: "product"
+          type: "Product"
+          multiplicity: "ManyToOne"
+
+    - name: "ReceivingRecord"
+      data:
+        - name: "receivingNumber"
+
+      relations:
+        - name: "shipment"
+          type: "Shipment"
+          multiplicity: "ManyToOne"
+
+        - name: "warehouse"
+          type: "Warehouse"
+          multiplicity: "ManyToOne"
+
+    - name: "InventoryAdjustment"
+      data:
+        - name: "adjustmentNumber"
+
+      relations:
+        - name: "inventoryItem"
+          type: "InventoryItem"
+          multiplicity: "ManyToOne"
+
+  enums:
+
+    - name: "PurchaseOrderStatus"
+      data:
+        - name: "Draft"
+        - name: "Approved"
+        - name: "Received"
+        - name: "Closed"
+
+    - name: "ShipmentStatus"
+      data:
+        - name: "Created"
+        - name: "InTransit"
+        - name: "Delivered"
+
+    - name: "InventoryStatus"
+      data:
+        - name: "Available"
+        - name: "Allocated"
+        - name: "BackOrdered"
+
+    - name: "ForecastType"
+      data:
+        - name: "Statistical"
+        - name: "Manual"
+
+    - name: "CarrierType"
+      data:
+        - name: "Ground"
+        - name: "Air"
+        - name: "Ocean"
+    ```

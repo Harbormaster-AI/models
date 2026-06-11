@@ -1,0 +1,104 @@
+  ```yaml
+  entities:
+
+    - name: "City"
+      data:
+        - name: "cityCode"
+        - name: "name"
+        - name: "population"
+
+      relations:
+        - name: "districts"
+          type: "District"
+          multiplicity: "OneToMany"
+        - name: "services"
+          type: "CityService"
+          multiplicity: "OneToMany"
+
+    - name: "District"
+      data:
+        - name: "districtCode"
+        - name: "name"
+
+      relations:
+        - name: "city"
+          type: "City"
+          multiplicity: "ManyToOne"
+
+    - name: "Citizen"
+      data:
+        - name: "citizenNumber"
+        - name: "firstName"
+        - name: "lastName"
+
+    - name: "CityService"
+      data:
+        - name: "serviceCode"
+        - name: "name"
+
+    - name: "Sensor"
+      data:
+        - name: "sensorId"
+        - name: "type"
+
+      relations:
+        - name: "district"
+          type: "District"
+          multiplicity: "ManyToOne"
+
+    - name: "TrafficSignal"
+      data:
+        - name: "signalNumber"
+        - name: "location"
+
+    - name: "UtilityMeter"
+      data:
+        - name: "meterNumber"
+
+    - name: "Incident"
+      data:
+        - name: "incidentNumber"
+        - name: "description"
+
+      relations:
+        - name: "district"
+          type: "District"
+          multiplicity: "ManyToOne"
+
+    - name: "MaintenanceWorkOrder"
+      data:
+        - name: "workOrderNumber"
+
+    - name: "TransitRoute"
+      data:
+        - name: "routeCode"
+
+    - name: "TransitVehicle"
+      data:
+        - name: "vehicleNumber"
+
+      relations:
+        - name: "route"
+          type: "TransitRoute"
+          multiplicity: "ManyToOne"
+
+    - name: "ParkingFacility"
+      data:
+        - name: "facilityCode"
+
+  enums:
+
+    - name: "SensorType"
+      data:
+        - name: "Traffic"
+        - name: "Weather"
+        - name: "AirQuality"
+        - name: "Parking"
+
+    - name: "IncidentSeverity"
+      data:
+        - name: "Low"
+        - name: "Medium"
+        - name: "High"
+        - name: "Critical"
+    ```

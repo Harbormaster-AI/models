@@ -1,0 +1,70 @@
+  ```yaml
+  entities:
+
+    - name: "Asset"
+      data:
+        - name: "assetNumber"
+        - name: "name"
+        - name: "type"
+          type: "AssetType"
+
+      relations:
+        - name: "vulnerabilities"
+          type: "Vulnerability"
+          multiplicity: "OneToMany"
+        - name: "incidents"
+          type: "Incident"
+          multiplicity: "OneToMany"
+
+    - name: "Threat"
+      data:
+        - name: "threatNumber"
+        - name: "name"
+        - name: "severity"
+          type: "Severity"
+
+    - name: "Vulnerability"
+      data:
+        - name: "cve"
+        - name: "description"
+
+      relations:
+        - name: "asset"
+          type: "Asset"
+          multiplicity: "ManyToOne"
+
+    - name: "Incident"
+      data:
+        - name: "incidentNumber"
+        - name: "detectedDate"
+        - name: "status"
+
+      relations:
+        - name: "asset"
+          type: "Asset"
+          multiplicity: "ManyToOne"
+
+    - name: "Control"
+      data:
+        - name: "controlNumber"
+        - name: "name"
+
+    - name: "Assessment"
+      data:
+        - name: "assessmentDate"
+
+  enums:
+    - name: "AssetType"
+      data:
+        - name: "Server"
+        - name: "Application"
+        - name: "Database"
+        - name: "Network"
+
+    - name: "Severity"
+      data:
+        - name: "Low"
+        - name: "Medium"
+        - name: "High"
+        - name: "Critical"
+    ```
