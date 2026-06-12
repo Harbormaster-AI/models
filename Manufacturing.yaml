@@ -1,0 +1,607 @@
+entities:
+
+  - name: Manufacturer
+    description: Organization responsible for producing manufactured products.
+
+    data:
+      - name: name
+        type: String
+      - name: legalName
+        type: String
+
+    relations:
+      - name: factories
+        type: Factory
+        multiplicity: OneToMany
+
+      - name: suppliers
+        type: Supplier
+        multiplicity: ManyToMany
+
+      - name: products
+        type: Product
+        multiplicity: OneToMany
+
+  - name: Factory
+
+    data:
+      - name: name
+        type: String
+      - name: factoryCode
+        type: String
+
+    relations:
+      - name: manufacturer
+        type: Manufacturer
+        multiplicity: ManyToOne
+
+      - name: productionLines
+        type: ProductionLine
+        multiplicity: OneToMany
+
+      - name: warehouses
+        type: Warehouse
+        multiplicity: OneToMany
+
+  - name: ProductionLine
+
+    data:
+      - name: name
+        type: String
+      - name: lineType
+        type: ProductionLineType
+
+    relations:
+      - name: factory
+        type: Factory
+        multiplicity: ManyToOne
+
+      - name: workCenters
+        type: WorkCenter
+        multiplicity: OneToMany
+
+      - name: productionSchedules
+        type: ProductionSchedule
+        multiplicity: OneToMany
+
+  - name: WorkCenter
+
+    data:
+      - name: name
+        type: String
+      - name: capability
+        type: String
+
+    relations:
+      - name: productionLine
+        type: ProductionLine
+        multiplicity: ManyToOne
+
+      - name: machines
+        type: Machine
+        multiplicity: OneToMany
+
+  - name: Machine
+
+    data:
+      - name: serialNumber
+        type: String
+      - name: machineStatus
+        type: MachineStatus
+
+    relations:
+      - name: workCenter
+        type: WorkCenter
+        multiplicity: ManyToOne
+
+      - name: maintenanceRecords
+        type: MaintenanceRecord
+        multiplicity: OneToMany
+
+  - name: Product
+
+    data:
+      - name: sku
+        type: String
+      - name: name
+        type: String
+      - name: productType
+        type: ProductType
+
+    relations:
+      - name: billOfMaterial
+        type: BillOfMaterial
+        multiplicity: OneToOne
+
+      - name: routings
+        type: Routing
+        multiplicity: OneToMany
+
+  - name: ProductFamily
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: products
+        type: Product
+        multiplicity: OneToMany
+
+  - name: BillOfMaterial
+
+    data:
+      - name: version
+        type: String
+
+    relations:
+      - name: product
+        type: Product
+        multiplicity: OneToOne
+
+      - name: materials
+        type: Material
+        multiplicity: ManyToMany
+
+  - name: Material
+
+    data:
+      - name: materialCode
+        type: String
+      - name: name
+        type: String
+      - name: materialType
+        type: MaterialType
+
+    relations:
+      - name: suppliers
+        type: Supplier
+        multiplicity: ManyToMany
+
+  - name: Routing
+
+    data:
+      - name: routingCode
+        type: String
+      - name: version
+        type: String
+
+    relations:
+      - name: product
+        type: Product
+        multiplicity: ManyToOne
+
+      - name: operations
+        type: Operation
+        multiplicity: OneToMany
+
+  - name: Operation
+
+    data:
+      - name: sequenceNumber
+        type: Integer
+      - name: standardDurationMinutes
+        type: Integer
+
+    relations:
+      - name: routing
+        type: Routing
+        multiplicity: ManyToOne
+
+      - name: workCenter
+        type: WorkCenter
+        multiplicity: ManyToOne
+
+  - name: ProductionSchedule
+
+    data:
+      - name: scheduleNumber
+        type: String
+      - name: scheduleStatus
+        type: ScheduleStatus
+
+    relations:
+      - name: productionLine
+        type: ProductionLine
+        multiplicity: ManyToOne
+
+      - name: workOrders
+        type: WorkOrder
+        multiplicity: OneToMany
+
+  - name: WorkOrder
+
+    data:
+      - name: orderNumber
+        type: String
+      - name: status
+        type: WorkOrderStatus
+
+    relations:
+      - name: product
+        type: Product
+        multiplicity: ManyToOne
+
+      - name: productionSchedule
+        type: ProductionSchedule
+        multiplicity: ManyToOne
+
+      - name: productionBatch
+        type: ProductionBatch
+        multiplicity: ManyToOne
+
+  - name: ProductionBatch
+
+    data:
+      - name: batchNumber
+        type: String
+      - name: batchStatus
+        type: BatchStatus
+
+    relations:
+      - name: workOrders
+        type: WorkOrder
+        multiplicity: OneToMany
+
+  - name: Warehouse
+
+    data:
+      - name: name
+        type: String
+      - name: warehouseType
+        type: WarehouseType
+
+    relations:
+      - name: inventoryItems
+        type: InventoryItem
+        multiplicity: OneToMany
+
+  - name: InventoryItem
+
+    data:
+      - name: quantityOnHand
+        type: Decimal
+      - name: quantityReserved
+        type: Decimal
+
+    relations:
+      - name: material
+        type: Material
+        multiplicity: ManyToOne
+
+      - name: warehouse
+        type: Warehouse
+        multiplicity: ManyToOne
+
+  - name: Supplier
+
+    data:
+      - name: name
+        type: String
+      - name: supplierCategory
+        type: SupplierCategory
+
+    relations:
+      - name: materials
+        type: Material
+        multiplicity: ManyToMany
+
+      - name: purchaseOrders
+        type: PurchaseOrder
+        multiplicity: OneToMany
+
+  - name: SupplierContract
+
+    data:
+      - name: contractNumber
+        type: String
+      - name: contractStatus
+        type: ContractStatus
+
+    relations:
+      - name: supplier
+        type: Supplier
+        multiplicity: ManyToOne
+
+  - name: PurchaseOrder
+
+    data:
+      - name: purchaseOrderNumber
+        type: String
+      - name: status
+        type: PurchaseOrderStatus
+
+    relations:
+      - name: supplier
+        type: Supplier
+        multiplicity: ManyToOne
+
+      - name: receipts
+        type: MaterialReceipt
+        multiplicity: OneToMany
+
+  - name: MaterialReceipt
+
+    data:
+      - name: receiptNumber
+        type: String
+
+    relations:
+      - name: purchaseOrder
+        type: PurchaseOrder
+        multiplicity: ManyToOne
+
+  - name: Shipment
+
+    data:
+      - name: shipmentNumber
+        type: String
+      - name: shipmentStatus
+        type: ShipmentStatus
+
+    relations:
+      - name: carrier
+        type: Carrier
+        multiplicity: ManyToOne
+
+  - name: Carrier
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: shipments
+        type: Shipment
+        multiplicity: OneToMany
+
+  - name: Customer
+
+    data:
+      - name: customerName
+        type: String
+      - name: customerType
+        type: CustomerType
+
+    relations:
+      - name: salesOrders
+        type: SalesOrder
+        multiplicity: OneToMany
+
+  - name: SalesOrder
+
+    data:
+      - name: salesOrderNumber
+        type: String
+      - name: status
+        type: SalesOrderStatus
+
+    relations:
+      - name: customer
+        type: Customer
+        multiplicity: ManyToOne
+
+      - name: shipments
+        type: Shipment
+        multiplicity: OneToMany
+
+  - name: QualityInspection
+
+    data:
+      - name: inspectionType
+        type: InspectionType
+      - name: inspectionResult
+        type: InspectionResult
+
+    relations:
+      - name: workOrder
+        type: WorkOrder
+        multiplicity: ManyToOne
+
+      - name: defects
+        type: QualityDefect
+        multiplicity: OneToMany
+
+  - name: QualityDefect
+
+    data:
+      - name: defectCode
+        type: String
+      - name: severity
+        type: DefectSeverity
+
+    relations:
+      - name: qualityInspection
+        type: QualityInspection
+        multiplicity: ManyToOne
+
+      - name: correctiveAction
+        type: CorrectiveAction
+        multiplicity: OneToOne
+
+  - name: CorrectiveAction
+
+    data:
+      - name: actionDescription
+        type: String
+      - name: actionStatus
+        type: ActionStatus
+
+    relations:
+      - name: qualityDefect
+        type: QualityDefect
+        multiplicity: OneToOne
+
+  - name: Employee
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+
+    relations:
+      - name: certifications
+        type: Certification
+        multiplicity: ManyToMany
+
+      - name: shifts
+        type: ShiftAssignment
+        multiplicity: OneToMany
+
+  - name: Certification
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: employees
+        type: Employee
+        multiplicity: ManyToMany
+
+  - name: Shift
+
+    data:
+      - name: name
+        type: String
+      - name: shiftType
+        type: ShiftType
+
+    relations:
+      - name: assignments
+        type: ShiftAssignment
+        multiplicity: OneToMany
+
+  - name: ShiftAssignment
+
+    data:
+      - name: assignmentDate
+        type: Date
+
+    relations:
+      - name: employee
+        type: Employee
+        multiplicity: ManyToOne
+
+      - name: shift
+        type: Shift
+        multiplicity: ManyToOne
+
+  - name: MaintenanceRecord
+
+    data:
+      - name: maintenanceType
+        type: MaintenanceType
+      - name: maintenanceStatus
+        type: MaintenanceStatus
+
+    relations:
+      - name: machine
+        type: Machine
+        multiplicity: ManyToOne
+
+  - name: CostCenter
+
+    data:
+      - name: code
+        type: String
+      - name: name
+        type: String
+
+  - name: Budget
+
+    data:
+      - name: fiscalYear
+        type: Integer
+
+    relations:
+      - name: costCenter
+        type: CostCenter
+        multiplicity: ManyToOne
+
+  - name: Forecast
+
+    data:
+      - name: forecastPeriod
+        type: String
+
+    relations:
+      - name: product
+        type: Product
+        multiplicity: ManyToOne
+
+  - name: DemandPlan
+
+    data:
+      - name: planningPeriod
+        type: String
+
+    relations:
+      - name: forecasts
+        type: Forecast
+        multiplicity: OneToMany
+
+enums:
+
+  - name: ProductType
+    data:
+      - name: FinishedGood
+      - name: Assembly
+      - name: SubAssembly
+
+  - name: MaterialType
+    data:
+      - name: RawMaterial
+      - name: Component
+      - name: Packaging
+
+  - name: MachineStatus
+    data:
+      - name: Available
+      - name: Running
+      - name: Maintenance
+      - name: Offline
+
+  - name: WorkOrderStatus
+    data:
+      - name: Planned
+      - name: Released
+      - name: InProgress
+      - name: Completed
+      - name: Cancelled
+
+  - name: InspectionResult
+    data:
+      - name: Pass
+      - name: Fail
+      - name: ConditionalPass
+
+valueObjects:
+
+  - name: Quantity
+    data:
+      - name: amount
+        type: Decimal
+      - name: unitOfMeasure
+        type: String
+
+  - name: Money
+    data:
+      - name: amount
+        type: Decimal
+      - name: currency
+        type: String
+
+  - name: Address
+    data:
+      - name: street
+        type: String
+      - name: city
+        type: String
+      - name: state
+        type: String
+      - name: postalCode
+        type: String
+      - name: country
+        type: String

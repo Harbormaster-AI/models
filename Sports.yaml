@@ -1,0 +1,613 @@
+entities:
+
+  - name: SportsOrganization
+    description: Governing body responsible for leagues, competitions, and regulations.
+
+    data:
+      - name: name
+        type: String
+      - name: organizationType
+        type: OrganizationType
+
+    relations:
+      - name: leagues
+        type: League
+        multiplicity: OneToMany
+
+      - name: competitions
+        type: Competition
+        multiplicity: OneToMany
+
+  - name: League
+
+    data:
+      - name: name
+        type: String
+      - name: sportType
+        type: SportType
+
+    relations:
+      - name: organization
+        type: SportsOrganization
+        multiplicity: ManyToOne
+
+      - name: seasons
+        type: Season
+        multiplicity: OneToMany
+
+      - name: teams
+        type: Team
+        multiplicity: OneToMany
+
+  - name: Competition
+
+    data:
+      - name: name
+        type: String
+      - name: competitionType
+        type: CompetitionType
+
+    relations:
+      - name: organization
+        type: SportsOrganization
+        multiplicity: ManyToOne
+
+      - name: seasons
+        type: Season
+        multiplicity: OneToMany
+
+  - name: Season
+
+    data:
+      - name: name
+        type: String
+      - name: year
+        type: Integer
+
+    relations:
+      - name: league
+        type: League
+        multiplicity: ManyToOne
+
+      - name: teams
+        type: Team
+        multiplicity: ManyToMany
+
+      - name: matches
+        type: Match
+        multiplicity: OneToMany
+
+      - name: standings
+        type: Standing
+        multiplicity: OneToMany
+
+  - name: Team
+
+    data:
+      - name: name
+        type: String
+      - name: teamType
+        type: TeamType
+
+    relations:
+      - name: players
+        type: Player
+        multiplicity: OneToMany
+
+      - name: coaches
+        type: Coach
+        multiplicity: OneToMany
+
+      - name: homeVenue
+        type: Venue
+        multiplicity: ManyToOne
+
+      - name: sponsors
+        type: Sponsor
+        multiplicity: ManyToMany
+
+  - name: Player
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+      - name: position
+        type: Position
+
+    relations:
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+      - name: contracts
+        type: PlayerContract
+        multiplicity: OneToMany
+
+      - name: statistics
+        type: PlayerStatistic
+        multiplicity: OneToMany
+
+      - name: injuries
+        type: Injury
+        multiplicity: OneToMany
+
+  - name: Coach
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+      - name: role
+        type: CoachRole
+
+    relations:
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: PlayerContract
+
+    data:
+      - name: contractNumber
+        type: String
+      - name: contractStatus
+        type: ContractStatus
+
+    relations:
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: Match
+
+    data:
+      - name: scheduledDate
+        type: Date
+      - name: matchStatus
+        type: MatchStatus
+
+    relations:
+      - name: season
+        type: Season
+        multiplicity: ManyToOne
+
+      - name: homeTeam
+        type: Team
+        multiplicity: ManyToOne
+
+      - name: awayTeam
+        type: Team
+        multiplicity: ManyToOne
+
+      - name: venue
+        type: Venue
+        multiplicity: ManyToOne
+
+      - name: officials
+        type: Official
+        multiplicity: ManyToMany
+
+      - name: matchStatistics
+        type: MatchStatistic
+        multiplicity: OneToMany
+
+  - name: Venue
+
+    data:
+      - name: name
+        type: String
+      - name: capacity
+        type: Integer
+
+    relations:
+      - name: matches
+        type: Match
+        multiplicity: OneToMany
+
+      - name: events
+        type: SportsEvent
+        multiplicity: OneToMany
+
+  - name: Official
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+      - name: officialType
+        type: OfficialType
+
+    relations:
+      - name: matches
+        type: Match
+        multiplicity: ManyToMany
+
+  - name: Standing
+
+    data:
+      - name: wins
+        type: Integer
+      - name: losses
+        type: Integer
+      - name: draws
+        type: Integer
+
+    relations:
+      - name: season
+        type: Season
+        multiplicity: ManyToOne
+
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: MatchStatistic
+
+    data:
+      - name: statisticType
+        type: StatisticType
+      - name: statisticValue
+        type: Decimal
+
+    relations:
+      - name: match
+        type: Match
+        multiplicity: ManyToOne
+
+  - name: PlayerStatistic
+
+    data:
+      - name: statisticType
+        type: StatisticType
+      - name: statisticValue
+        type: Decimal
+
+    relations:
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+  - name: Injury
+
+    data:
+      - name: injuryType
+        type: InjuryType
+      - name: injuryStatus
+        type: InjuryStatus
+
+    relations:
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+  - name: TrainingSession
+
+    data:
+      - name: sessionType
+        type: TrainingType
+      - name: sessionDate
+        type: Date
+
+    relations:
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+      - name: participants
+        type: Player
+        multiplicity: ManyToMany
+
+  - name: Tournament
+
+    data:
+      - name: name
+        type: String
+      - name: tournamentType
+        type: TournamentType
+
+    relations:
+      - name: brackets
+        type: TournamentBracket
+        multiplicity: OneToMany
+
+      - name: participatingTeams
+        type: Team
+        multiplicity: ManyToMany
+
+  - name: TournamentBracket
+
+    data:
+      - name: roundName
+        type: String
+
+    relations:
+      - name: tournament
+        type: Tournament
+        multiplicity: ManyToOne
+
+      - name: matches
+        type: Match
+        multiplicity: OneToMany
+
+  - name: Sponsor
+
+    data:
+      - name: sponsorName
+        type: String
+      - name: sponsorCategory
+        type: SponsorCategory
+
+    relations:
+      - name: teams
+        type: Team
+        multiplicity: ManyToMany
+
+      - name: sponsorshipAgreements
+        type: SponsorshipAgreement
+        multiplicity: OneToMany
+
+  - name: SponsorshipAgreement
+
+    data:
+      - name: agreementNumber
+        type: String
+
+    relations:
+      - name: sponsor
+        type: Sponsor
+        multiplicity: ManyToOne
+
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: Fan
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+
+    relations:
+      - name: memberships
+        type: FanMembership
+        multiplicity: OneToMany
+
+      - name: ticketPurchases
+        type: TicketPurchase
+        multiplicity: OneToMany
+
+  - name: FanMembership
+
+    data:
+      - name: membershipLevel
+        type: MembershipLevel
+
+    relations:
+      - name: fan
+        type: Fan
+        multiplicity: ManyToOne
+
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: Ticket
+
+    data:
+      - name: ticketType
+        type: TicketType
+
+    relations:
+      - name: match
+        type: Match
+        multiplicity: ManyToOne
+
+  - name: TicketPurchase
+
+    data:
+      - name: purchaseDate
+        type: Date
+
+    relations:
+      - name: fan
+        type: Fan
+        multiplicity: ManyToOne
+
+      - name: ticket
+        type: Ticket
+        multiplicity: ManyToOne
+
+  - name: MerchandiseItem
+
+    data:
+      - name: itemName
+        type: String
+      - name: merchandiseCategory
+        type: MerchandiseCategory
+
+    relations:
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+  - name: SportsEvent
+
+    data:
+      - name: eventName
+        type: String
+      - name: eventType
+        type: EventType
+
+    relations:
+      - name: venue
+        type: Venue
+        multiplicity: ManyToOne
+
+  - name: BroadcastPartner
+
+    data:
+      - name: partnerName
+        type: String
+
+    relations:
+      - name: broadcastRights
+        type: BroadcastRightsAgreement
+        multiplicity: OneToMany
+
+  - name: BroadcastRightsAgreement
+
+    data:
+      - name: agreementNumber
+        type: String
+
+    relations:
+      - name: broadcastPartner
+        type: BroadcastPartner
+        multiplicity: ManyToOne
+
+      - name: league
+        type: League
+        multiplicity: ManyToOne
+
+  - name: MediaCoverage
+
+    data:
+      - name: coverageType
+        type: CoverageType
+
+    relations:
+      - name: match
+        type: Match
+        multiplicity: ManyToOne
+
+  - name: AthleteAward
+
+    data:
+      - name: awardName
+        type: String
+
+    relations:
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+  - name: ScoutingReport
+
+    data:
+      - name: rating
+        type: Integer
+
+    relations:
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+  - name: DraftEvent
+
+    data:
+      - name: eventName
+        type: String
+
+    relations:
+      - name: draftSelections
+        type: DraftSelection
+        multiplicity: OneToMany
+
+  - name: DraftSelection
+
+    data:
+      - name: round
+        type: Integer
+      - name: selectionNumber
+        type: Integer
+
+    relations:
+      - name: draftEvent
+        type: DraftEvent
+        multiplicity: ManyToOne
+
+      - name: player
+        type: Player
+        multiplicity: ManyToOne
+
+      - name: team
+        type: Team
+        multiplicity: ManyToOne
+
+enums:
+
+  - name: SportType
+    data:
+      - name: Football
+      - name: Basketball
+      - name: Baseball
+      - name: Hockey
+      - name: Soccer
+      - name: Tennis
+
+  - name: MatchStatus
+    data:
+      - name: Scheduled
+      - name: InProgress
+      - name: Completed
+      - name: Cancelled
+      - name: Postponed
+
+  - name: Position
+    data:
+      - name: Goalkeeper
+      - name: Defender
+      - name: Midfielder
+      - name: Forward
+      - name: Guard
+      - name: Center
+
+  - name: InjuryStatus
+    data:
+      - name: Active
+      - name: Recovering
+      - name: Cleared
+
+  - name: CompetitionType
+    data:
+      - name: League
+      - name: Cup
+      - name: Tournament
+      - name: Championship
+
+valueObjects:
+
+  - name: Score
+    data:
+      - name: homeScore
+        type: Integer
+      - name: awayScore
+        type: Integer
+
+  - name: Money
+    data:
+      - name: amount
+        type: Decimal
+      - name: currency
+        type: String
+
+  - name: Address
+    data:
+      - name: street
+        type: String
+      - name: city
+        type: String
+      - name: state
+        type: String
+      - name: country
+        type: String

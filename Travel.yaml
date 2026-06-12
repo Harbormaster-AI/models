@@ -1,0 +1,578 @@
+entities:
+
+  - name: TravelProvider
+    description: Organization providing travel-related services.
+
+    data:
+      - name: name
+        type: String
+      - name: providerType
+        type: ProviderType
+
+    relations:
+      - name: brands
+        type: TravelBrand
+        multiplicity: OneToMany
+
+      - name: offerings
+        type: TravelOffering
+        multiplicity: OneToMany
+
+  - name: TravelBrand
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: travelProvider
+        type: TravelProvider
+        multiplicity: ManyToOne
+
+  - name: Traveler
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+      - name: travelerType
+        type: TravelerType
+
+    relations:
+      - name: travelerProfiles
+        type: TravelerProfile
+        multiplicity: OneToMany
+
+      - name: trips
+        type: Trip
+        multiplicity: OneToMany
+
+      - name: loyaltyAccounts
+        type: LoyaltyAccount
+        multiplicity: OneToMany
+
+  - name: TravelerProfile
+
+    data:
+      - name: preferredLanguage
+        type: String
+      - name: preferredCurrency
+        type: String
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+  - name: Trip
+
+    data:
+      - name: tripName
+        type: String
+      - name: tripType
+        type: TripType
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+      - name: itinerary
+        type: Itinerary
+        multiplicity: OneToOne
+
+      - name: bookings
+        type: Booking
+        multiplicity: OneToMany
+
+      - name: destinations
+        type: Destination
+        multiplicity: ManyToMany
+
+  - name: Itinerary
+
+    data:
+      - name: itineraryStatus
+        type: ItineraryStatus
+
+    relations:
+      - name: trip
+        type: Trip
+        multiplicity: OneToOne
+
+      - name: itineraryItems
+        type: ItineraryItem
+        multiplicity: OneToMany
+
+  - name: ItineraryItem
+
+    data:
+      - name: sequenceNumber
+        type: Integer
+      - name: itemType
+        type: ItineraryItemType
+
+    relations:
+      - name: itinerary
+        type: Itinerary
+        multiplicity: ManyToOne
+
+  - name: Destination
+
+    data:
+      - name: name
+        type: String
+      - name: destinationType
+        type: DestinationType
+
+    relations:
+      - name: attractions
+        type: Attraction
+        multiplicity: OneToMany
+
+      - name: accommodations
+        type: Accommodation
+        multiplicity: OneToMany
+
+  - name: Attraction
+
+    data:
+      - name: name
+        type: String
+      - name: attractionType
+        type: AttractionType
+
+    relations:
+      - name: destination
+        type: Destination
+        multiplicity: ManyToOne
+
+  - name: Booking
+
+    data:
+      - name: bookingReference
+        type: String
+      - name: bookingStatus
+        type: BookingStatus
+
+    relations:
+      - name: trip
+        type: Trip
+        multiplicity: ManyToOne
+
+      - name: payment
+        type: Payment
+        multiplicity: OneToOne
+
+  - name: TravelOffering
+
+    data:
+      - name: name
+        type: String
+      - name: offeringType
+        type: OfferingType
+
+    relations:
+      - name: provider
+        type: TravelProvider
+        multiplicity: ManyToOne
+
+  - name: Flight
+
+    data:
+      - name: flightNumber
+        type: String
+      - name: cabinClass
+        type: CabinClass
+
+    relations:
+      - name: airline
+        type: Airline
+        multiplicity: ManyToOne
+
+      - name: departureAirport
+        type: Airport
+        multiplicity: ManyToOne
+
+      - name: arrivalAirport
+        type: Airport
+        multiplicity: ManyToOne
+
+  - name: Airline
+
+    data:
+      - name: name
+        type: String
+      - name: airlineCode
+        type: String
+
+    relations:
+      - name: flights
+        type: Flight
+        multiplicity: OneToMany
+
+      - name: loyaltyPrograms
+        type: LoyaltyProgram
+        multiplicity: OneToMany
+
+  - name: Airport
+
+    data:
+      - name: airportCode
+        type: String
+      - name: name
+        type: String
+
+    relations:
+      - name: terminals
+        type: Terminal
+        multiplicity: OneToMany
+
+  - name: Terminal
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: airport
+        type: Airport
+        multiplicity: ManyToOne
+
+  - name: Accommodation
+
+    data:
+      - name: name
+        type: String
+      - name: accommodationType
+        type: AccommodationType
+
+    relations:
+      - name: destination
+        type: Destination
+        multiplicity: ManyToOne
+
+      - name: rooms
+        type: Room
+        multiplicity: OneToMany
+
+  - name: Room
+
+    data:
+      - name: roomType
+        type: RoomType
+
+    relations:
+      - name: accommodation
+        type: Accommodation
+        multiplicity: ManyToOne
+
+  - name: RentalVehicle
+
+    data:
+      - name: vehicleClass
+        type: VehicleClass
+
+    relations:
+      - name: rentalAgency
+        type: RentalAgency
+        multiplicity: ManyToOne
+
+  - name: RentalAgency
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: rentalVehicles
+        type: RentalVehicle
+        multiplicity: OneToMany
+
+  - name: Cruise
+
+    data:
+      - name: cruiseName
+        type: String
+
+    relations:
+      - name: cruiseLine
+        type: CruiseLine
+        multiplicity: ManyToOne
+
+  - name: CruiseLine
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: cruises
+        type: Cruise
+        multiplicity: OneToMany
+
+  - name: Tour
+
+    data:
+      - name: name
+        type: String
+      - name: tourType
+        type: TourType
+
+    relations:
+      - name: destination
+        type: Destination
+        multiplicity: ManyToOne
+
+      - name: tourOperator
+        type: TourOperator
+        multiplicity: ManyToOne
+
+  - name: TourOperator
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: tours
+        type: Tour
+        multiplicity: OneToMany
+
+  - name: LoyaltyProgram
+
+    data:
+      - name: programName
+        type: String
+
+    relations:
+      - name: loyaltyAccounts
+        type: LoyaltyAccount
+        multiplicity: OneToMany
+
+  - name: LoyaltyAccount
+
+    data:
+      - name: membershipNumber
+        type: String
+      - name: tierLevel
+        type: LoyaltyTier
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+      - name: loyaltyProgram
+        type: LoyaltyProgram
+        multiplicity: ManyToOne
+
+  - name: TravelInsurancePolicy
+
+    data:
+      - name: policyNumber
+        type: String
+      - name: policyType
+        type: InsuranceType
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+      - name: insuranceClaim
+        type: InsuranceClaim
+        multiplicity: OneToMany
+
+  - name: InsuranceClaim
+
+    data:
+      - name: claimNumber
+        type: String
+      - name: claimStatus
+        type: ClaimStatus
+
+    relations:
+      - name: travelInsurancePolicy
+        type: TravelInsurancePolicy
+        multiplicity: ManyToOne
+
+  - name: Payment
+
+    data:
+      - name: paymentReference
+        type: String
+      - name: paymentMethod
+        type: PaymentMethod
+
+    relations:
+      - name: invoices
+        type: Invoice
+        multiplicity: OneToMany
+
+  - name: Invoice
+
+    data:
+      - name: invoiceNumber
+        type: String
+
+    relations:
+      - name: payment
+        type: Payment
+        multiplicity: ManyToOne
+
+  - name: TravelDocument
+
+    data:
+      - name: documentType
+        type: TravelDocumentType
+      - name: documentNumber
+        type: String
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+  - name: Visa
+
+    data:
+      - name: visaType
+        type: VisaType
+
+    relations:
+      - name: travelDocument
+        type: TravelDocument
+        multiplicity: ManyToOne
+
+  - name: TravelAlert
+
+    data:
+      - name: alertType
+        type: AlertType
+
+    relations:
+      - name: destination
+        type: Destination
+        multiplicity: ManyToOne
+
+  - name: TravelReview
+
+    data:
+      - name: rating
+        type: Integer
+
+    relations:
+      - name: traveler
+        type: Traveler
+        multiplicity: ManyToOne
+
+      - name: destination
+        type: Destination
+        multiplicity: ManyToOne
+
+  - name: TravelCampaign
+
+    data:
+      - name: campaignName
+        type: String
+
+    relations:
+      - name: destinations
+        type: Destination
+        multiplicity: ManyToMany
+
+  - name: TravelAgent
+
+    data:
+      - name: firstName
+        type: String
+      - name: lastName
+        type: String
+
+    relations:
+      - name: managedBookings
+        type: Booking
+        multiplicity: OneToMany
+
+  - name: CorporateAccount
+
+    data:
+      - name: companyName
+        type: String
+
+    relations:
+      - name: travelers
+        type: Traveler
+        multiplicity: OneToMany
+
+enums:
+
+  - name: TripType
+    data:
+      - name: Leisure
+      - name: Business
+      - name: Family
+      - name: Adventure
+      - name: Group
+
+  - name: BookingStatus
+    data:
+      - name: Draft
+      - name: Confirmed
+      - name: Ticketed
+      - name: Completed
+      - name: Cancelled
+
+  - name: AccommodationType
+    data:
+      - name: Hotel
+      - name: Resort
+      - name: Hostel
+      - name: VacationRental
+      - name: Lodge
+
+  - name: DestinationType
+    data:
+      - name: City
+      - name: Region
+      - name: Country
+      - name: Attraction
+
+  - name: ProviderType
+    data:
+      - name: Airline
+      - name: HotelChain
+      - name: CruiseLine
+      - name: TourOperator
+      - name: TravelAgency
+
+valueObjects:
+
+  - name: Money
+    data:
+      - name: amount
+        type: Decimal
+      - name: currency
+        type: String
+
+  - name: Address
+    data:
+      - name: street
+        type: String
+      - name: city
+        type: String
+      - name: state
+        type: String
+      - name: postalCode
+        type: String
+      - name: country
+        type: String
+
+  - name: DateRange
+    data:
+      - name: startDate
+        type: Date
+      - name: endDate
+        type: Date

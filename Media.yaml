@@ -1,0 +1,600 @@
+entities:
+
+  - name: MediaCompany
+    description: Organization that produces, distributes, or licenses content.
+
+    data:
+      - name: name
+        type: String
+      - name: companyType
+        type: MediaCompanyType
+
+    relations:
+      - name: brands
+        type: MediaBrand
+        multiplicity: OneToMany
+
+      - name: contentLibraries
+        type: ContentLibrary
+        multiplicity: OneToMany
+
+      - name: distributionChannels
+        type: DistributionChannel
+        multiplicity: OneToMany
+
+  - name: MediaBrand
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: mediaCompany
+        type: MediaCompany
+        multiplicity: ManyToOne
+
+      - name: publications
+        type: Publication
+        multiplicity: OneToMany
+
+  - name: Publication
+
+    data:
+      - name: name
+        type: String
+      - name: publicationType
+        type: PublicationType
+
+    relations:
+      - name: brand
+        type: MediaBrand
+        multiplicity: ManyToOne
+
+      - name: contentItems
+        type: ContentItem
+        multiplicity: OneToMany
+
+  - name: ContentLibrary
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: contentItems
+        type: ContentItem
+        multiplicity: OneToMany
+
+  - name: ContentItem
+
+    data:
+      - name: title
+        type: String
+      - name: contentType
+        type: ContentType
+      - name: publicationStatus
+        type: PublicationStatus
+
+    relations:
+      - name: publication
+        type: Publication
+        multiplicity: ManyToOne
+
+      - name: contentVersion
+        type: ContentVersion
+        multiplicity: OneToMany
+
+      - name: categories
+        type: Category
+        multiplicity: ManyToMany
+
+      - name: tags
+        type: Tag
+        multiplicity: ManyToMany
+
+      - name: assets
+        type: MediaAsset
+        multiplicity: OneToMany
+
+      - name: contributors
+        type: Contributor
+        multiplicity: ManyToMany
+
+      - name: licensingAgreements
+        type: LicensingAgreement
+        multiplicity: OneToMany
+
+  - name: ContentVersion
+
+    data:
+      - name: versionNumber
+        type: Integer
+      - name: changeSummary
+        type: String
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+  - name: Category
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: contentItems
+        type: ContentItem
+        multiplicity: ManyToMany
+
+  - name: Tag
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: contentItems
+        type: ContentItem
+        multiplicity: ManyToMany
+
+  - name: Contributor
+
+    data:
+      - name: fullName
+        type: String
+      - name: contributorType
+        type: ContributorType
+
+    relations:
+      - name: contentItems
+        type: ContentItem
+        multiplicity: ManyToMany
+
+      - name: contracts
+        type: ContributorContract
+        multiplicity: OneToMany
+
+  - name: ContributorContract
+
+    data:
+      - name: contractNumber
+        type: String
+      - name: contractStatus
+        type: ContractStatus
+
+    relations:
+      - name: contributor
+        type: Contributor
+        multiplicity: ManyToOne
+
+  - name: EditorialCalendar
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: contentAssignments
+        type: ContentAssignment
+        multiplicity: OneToMany
+
+  - name: ContentAssignment
+
+    data:
+      - name: dueDate
+        type: Date
+      - name: assignmentStatus
+        type: AssignmentStatus
+
+    relations:
+      - name: contributor
+        type: Contributor
+        multiplicity: ManyToOne
+
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+      - name: editorialCalendar
+        type: EditorialCalendar
+        multiplicity: ManyToOne
+
+  - name: MediaAsset
+
+    data:
+      - name: assetName
+        type: String
+      - name: assetType
+        type: AssetType
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+      - name: storageLocation
+        type: StorageLocation
+        multiplicity: ManyToOne
+
+  - name: StorageLocation
+
+    data:
+      - name: name
+        type: String
+      - name: storageType
+        type: StorageType
+
+    relations:
+      - name: assets
+        type: MediaAsset
+        multiplicity: OneToMany
+
+  - name: DistributionChannel
+
+    data:
+      - name: name
+        type: String
+      - name: channelType
+        type: DistributionChannelType
+
+    relations:
+      - name: distributionEvents
+        type: DistributionEvent
+        multiplicity: OneToMany
+
+  - name: DistributionEvent
+
+    data:
+      - name: distributionDate
+        type: Date
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+      - name: distributionChannel
+        type: DistributionChannel
+        multiplicity: ManyToOne
+
+  - name: AudienceSegment
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: campaigns
+        type: MarketingCampaign
+        multiplicity: ManyToMany
+
+  - name: Subscriber
+
+    data:
+      - name: emailAddress
+        type: String
+      - name: subscriptionStatus
+        type: SubscriptionStatus
+
+    relations:
+      - name: subscriptions
+        type: Subscription
+        multiplicity: OneToMany
+
+  - name: Subscription
+
+    data:
+      - name: subscriptionType
+        type: SubscriptionType
+
+    relations:
+      - name: subscriber
+        type: Subscriber
+        multiplicity: ManyToOne
+
+      - name: publication
+        type: Publication
+        multiplicity: ManyToOne
+
+      - name: invoices
+        type: Invoice
+        multiplicity: OneToMany
+
+  - name: Invoice
+
+    data:
+      - name: invoiceNumber
+        type: String
+
+    relations:
+      - name: subscription
+        type: Subscription
+        multiplicity: ManyToOne
+
+      - name: payments
+        type: Payment
+        multiplicity: OneToMany
+
+  - name: Payment
+
+    data:
+      - name: paymentReference
+        type: String
+      - name: paymentMethod
+        type: PaymentMethod
+
+    relations:
+      - name: invoice
+        type: Invoice
+        multiplicity: ManyToOne
+
+  - name: AdvertisingAccount
+
+    data:
+      - name: advertiserName
+        type: String
+
+    relations:
+      - name: campaigns
+        type: AdvertisingCampaign
+        multiplicity: OneToMany
+
+  - name: AdvertisingCampaign
+
+    data:
+      - name: campaignName
+        type: String
+      - name: campaignStatus
+        type: CampaignStatus
+
+    relations:
+      - name: advertisingAccount
+        type: AdvertisingAccount
+        multiplicity: ManyToOne
+
+      - name: placements
+        type: AdPlacement
+        multiplicity: OneToMany
+
+  - name: AdPlacement
+
+    data:
+      - name: placementType
+        type: PlacementType
+
+    relations:
+      - name: advertisingCampaign
+        type: AdvertisingCampaign
+        multiplicity: ManyToOne
+
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+  - name: MarketingCampaign
+
+    data:
+      - name: campaignName
+        type: String
+
+    relations:
+      - name: audienceSegments
+        type: AudienceSegment
+        multiplicity: ManyToMany
+
+  - name: AnalyticsReport
+
+    data:
+      - name: reportName
+        type: String
+      - name: reportPeriod
+        type: String
+
+    relations:
+      - name: metrics
+        type: AnalyticsMetric
+        multiplicity: OneToMany
+
+  - name: AnalyticsMetric
+
+    data:
+      - name: metricName
+        type: String
+      - name: metricValue
+        type: Decimal
+
+    relations:
+      - name: analyticsReport
+        type: AnalyticsReport
+        multiplicity: ManyToOne
+
+  - name: LicensingAgreement
+
+    data:
+      - name: agreementNumber
+        type: String
+      - name: licenseType
+        type: LicenseType
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+      - name: rightsHolder
+        type: RightsHolder
+        multiplicity: ManyToOne
+
+  - name: RightsHolder
+
+    data:
+      - name: name
+        type: String
+
+    relations:
+      - name: licensingAgreements
+        type: LicensingAgreement
+        multiplicity: OneToMany
+
+  - name: ContentReview
+
+    data:
+      - name: reviewStatus
+        type: ReviewStatus
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+      - name: reviewer
+        type: Contributor
+        multiplicity: ManyToOne
+
+  - name: ModerationCase
+
+    data:
+      - name: caseStatus
+        type: ModerationStatus
+
+    relations:
+      - name: contentItem
+        type: ContentItem
+        multiplicity: ManyToOne
+
+  - name: Event
+
+    data:
+      - name: eventName
+        type: String
+      - name: eventType
+        type: EventType
+
+    relations:
+      - name: coverageContent
+        type: ContentItem
+        multiplicity: OneToMany
+
+  - name: PodcastSeries
+
+    data:
+      - name: title
+        type: String
+
+    relations:
+      - name: episodes
+        type: PodcastEpisode
+        multiplicity: OneToMany
+
+  - name: PodcastEpisode
+
+    data:
+      - name: title
+        type: String
+      - name: duration
+        type: Duration
+
+    relations:
+      - name: podcastSeries
+        type: PodcastSeries
+        multiplicity: ManyToOne
+
+      - name: contentItem
+        type: ContentItem
+        multiplicity: OneToOne
+
+  - name: VideoSeries
+
+    data:
+      - name: title
+        type: String
+
+    relations:
+      - name: episodes
+        type: VideoEpisode
+        multiplicity: OneToMany
+
+  - name: VideoEpisode
+
+    data:
+      - name: title
+        type: String
+      - name: duration
+        type: Duration
+
+    relations:
+      - name: videoSeries
+        type: VideoSeries
+        multiplicity: ManyToOne
+
+      - name: contentItem
+        type: ContentItem
+        multiplicity: OneToOne
+
+enums:
+
+  - name: ContentType
+    data:
+      - name: Article
+      - name: Video
+      - name: Podcast
+      - name: Livestream
+      - name: Newsletter
+
+  - name: PublicationStatus
+    data:
+      - name: Draft
+      - name: Review
+      - name: Approved
+      - name: Published
+      - name: Archived
+
+  - name: ContributorType
+    data:
+      - name: Journalist
+      - name: Editor
+      - name: Producer
+      - name: Photographer
+      - name: Host
+
+  - name: DistributionChannelType
+    data:
+      - name: Website
+      - name: MobileApp
+      - name: StreamingPlatform
+      - name: Broadcast
+      - name: SocialMedia
+
+  - name: SubscriptionStatus
+    data:
+      - name: Active
+      - name: Suspended
+      - name: Cancelled
+
+valueObjects:
+
+  - name: Money
+    data:
+      - name: amount
+        type: Decimal
+
+      - name: currency
+        type: String
+
+  - name: Duration
+    data:
+      - name: seconds
+        type: Integer
+
+  - name: MediaFile
+    data:
+      - name: url
+        type: String
+
+      - name: format
+        type: String
+
+      - name: sizeInBytes
+        type: Long
